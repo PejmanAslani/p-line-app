@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import TextInputCustom from "../../reuseables/TextInputCustom";
-import { CheckLg, Trash3Fill } from "react-bootstrap-icons";
+import {  PlusLg, Trash3Fill } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 
@@ -71,8 +71,8 @@ function AddPattern(props: any) {
         if (result.data.hasError) {
           PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
         } else {
-          props.modal(false);
           props.reload();
+          getData();
         }
       })
       .catch((error) => {
@@ -171,7 +171,7 @@ function AddPattern(props: any) {
               style={{ marginTop: "30px" }}
               type="submit"
             >
-              <CheckLg size={20} />
+              <PlusLg size={20} />
             </Button>
           </Col>
         </Row>

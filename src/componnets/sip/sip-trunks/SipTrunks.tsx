@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 import SipTrunkForm from "./SipTrunkForm";
-import { Gear, PencilFill, PlusLg, Trash3Fill } from "react-bootstrap-icons";
+import { Gear, PencilFill, PencilSquare, PlusLg, Trash3Fill } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import ModalCustom from "../../reuseables/modal/ModalCustom";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
@@ -73,7 +73,7 @@ const SipTrunks = () => {
           navigate("/sip-trunks/edit/" + id);
         }}
       >
-        <PencilFill color="green" size={20} />
+        <PencilSquare color="green" size={17} />
       </p>
     );
   };

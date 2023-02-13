@@ -52,8 +52,8 @@ const AddTrunks = (props: any) => {
         if (result.data.hasError) {
           PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
         } else {
-          props.modal(false);
           props.reload();
+          getData()
         }
       })
       .catch((error: any) => {
@@ -62,6 +62,7 @@ const AddTrunks = (props: any) => {
       });
 
   }
+  //for Grid Options
   const saveChanges = (data: any) => {
     let RouteID = props.id;
     setState({ ...state, outboundRoute: { id: RouteID } });

@@ -146,6 +146,10 @@ const AddGroupUsersForm = (props: any) => {
                             variant="primary" type="submit">
                             Save
                         </Button>
+                        <Button
+                            variant="danget" onClick={()=>{navigate('/sip-users/index')}}>
+                            Exit
+                        </Button>
                     </Col>
                 </Form>
             </Row>

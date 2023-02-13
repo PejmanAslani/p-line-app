@@ -124,7 +124,14 @@ const SpecificOutboundsForm = (props: any) => {
               <Button variant="primary" type="submit">
                 Save
               </Button>{" "}
-
+              <Button
+                variant="danger"
+                onClick={() => {
+                  props.modal(false);
+                }}
+              >
+                Exit
+              </Button>
             </Col>
           </Row>
         </Form>

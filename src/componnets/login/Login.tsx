@@ -58,20 +58,20 @@ function Login(props: LoginProps) {
                 </div>
               </div>
               <div className="p-5 login-body bg-white rounded shadow-lg">
-                <div className="checkbox-wrapper-6">
+                {/* <div className="checkbox-wrapper-6">
                   <input className="tgl tgl-light" id="cb1-6" type="checkbox" />
                   <label className="tgl-btn" htmlFor="cb1-6" />
-                </div>
-                <h3 className="mb-2 text-center pt-5">Kaj Call Center</h3>
+                </div> */}
+                <h3 className="mb-2 text-center pt-5">KAJ</h3>
                 <form onSubmit={Login}>
-                  <label htmlFor="inp" className="inp">
-                    <input type="text" id="inp" onChange={(e) => { state.username = e.target.value }} placeholder="&nbsp;" />
-                    <span className="label">UserName</span>
+                <label htmlFor="inp" className="inp">
+                    <input type="text" onChange={(e) => { state.username = e.target.value }} id="inp" placeholder="&nbsp;" />
+                    <span className="label">username</span>
                     <span className="focus-bg"></span>
                   </label>
                   <label htmlFor="inp" className="inp">
-                    <input type="password" autoComplete="off" onChange={(e) => { state.password = e.target.value }} id="inp" placeholder="&nbsp;" />
-                    <span className="label">Password</span>
+                    <input type="password"  onChange={(e) => { state.password = e.target.value }} id="inp" placeholder="&nbsp;" />
+                    <span className="label">password</span>
                     <span className="focus-bg"></span>
                   </label>
                   <br />
@@ -86,10 +86,11 @@ function Login(props: LoginProps) {
                       setState={setState}
                     />
                     <Col style={{ margin: "30px" }}>
-                      <button className="button">Login</button>
+                     
                     </Col>
                   </Row>
                   <div className="text-center">
+                  <button className="button">Login</button>
                   </div>
                 </form>
               </div>

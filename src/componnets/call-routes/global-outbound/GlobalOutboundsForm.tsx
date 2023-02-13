@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Col, Row } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
-import CheckboxCustom from '../../reuseables/CheckboxCustom';
-import TextInputCustom from '../../reuseables/TextInputCustom';
-import TextareaCustom from '../../reuseables/TextareaCustom';
+import React, { useState, useEffect } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import CheckboxCustom from "../../reuseables/CheckboxCustom";
+import TextInputCustom from "../../reuseables/TextInputCustom";
+import TextareaCustom from "../../reuseables/TextareaCustom";
 
-import PlineTools, { TypeAlert } from '../../services/PlineTools';
+import PlineTools, { TypeAlert } from "../../services/PlineTools";
+import { useNavigate } from "react-router";
 
 const GlobalOutboundsForm = (props: any) => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     id: null,
-    name: '',
+    name: "",
     sequential: 0,
     enable: false,
     privateRoute: false,
-    description: ''
+    description: "",
   });
-
 
   const saveData = (e: any) => {
     e.preventDefault();
     let url = "/outbound-routes";
     if (state.id == null) {
-
       PlineTools.postRequest(url, state)
         .then((result: any) => {
           if (result.data.hasError) {
@@ -33,8 +33,9 @@ const GlobalOutboundsForm = (props: any) => {
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     } else {
       PlineTools.patchRequest(url, state)
@@ -47,31 +48,30 @@ const GlobalOutboundsForm = (props: any) => {
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
-
-  }
+  };
   const getData = () => {
     const id = props.id;
     if (id != undefined) {
       PlineTools.getRequest("/outbound-routes/" + id)
         .then((result) => {
-         
           setState(result.data);
         })
         .catch(() => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
   };
   useEffect(() => {
     getData();
     console.log(props.id);
-
   }, []);
-
 
   return (
     <Row>
@@ -96,8 +96,6 @@ const GlobalOutboundsForm = (props: any) => {
               require={true}
             />
 
-
-
             <TextareaCustom
               name="description"
               label="Description"
@@ -111,18 +109,24 @@ const GlobalOutboundsForm = (props: any) => {
               <Button variant="primary" type="submit">
                 Save
               </Button>{" "}
-
+              <Button
+                variant="danger"
+                onClick={() => {
+                  props.modal(false);
+                }}
+              >
+                Exit
+              </Button>
             </Col>
           </Row>
         </Form>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default GlobalOutboundsForm
-
+export default GlobalOutboundsForm;
 
 GlobalOutboundsForm.defaultProps = {
-  id: null
-}
+  id: null,
+};

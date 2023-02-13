@@ -3,6 +3,7 @@ import DataGrid from '../../grid-view/DataGrid/DataGrid'
 import {
     PencilSquare,
     PlusLg,
+    Trash,
     Trash3Fill
 } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
@@ -131,6 +132,16 @@ const SipUsers = () => {
                                     setmodalType(<AddGroupUsersForm modal={setModalIsOpen} reload={() => reload()} />)
                                 }}
                             ><PlusLg size={15} />Bulk Addition</Dropdown.Item>
+                               <Dropdown.Item
+                                onClick={() => {
+                                    navigate("/sip-users-bulk-delete/index");
+                                }}
+                            ><Trash size={15} />Bulk Delete</Dropdown.Item>
+                               <Dropdown.Item
+                                onClick={() => {
+                                    navigate("/sip-users-bulk-edit/index");
+                                }}
+                            ><PencilSquare size={15} />Bulk Edit</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>

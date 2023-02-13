@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DataGrid from '../../grid-view/DataGrid/DataGrid'
-import { BuildingGear, Diagram2, PencilFill, PlusLg, Trash3Fill } from 'react-bootstrap-icons';
+import { BuildingGear, Diagram2, PencilFill, PencilSquare, PlusLg, Trash3Fill } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import GlobalOutboundsForm from './GlobalOutboundsForm';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
@@ -72,7 +72,7 @@ const GlobalOutbounds1 = () => {
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
-        }}><PencilFill color="green" size={18} /></p>
+        }}> <PencilSquare color="green" size={17} /></p>
     }
 
     const Pattern = (params: any) => {

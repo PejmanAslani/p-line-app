@@ -36,7 +36,7 @@ const Header = (props: IHeaderProps) => {
 
   return (
     <header className="header">
-      <Navbar expand="lg" style={{ 'backgroundColor': "#FFFFFF ", boxShadow: "2px 2px #C4C4C5" }} variant="light">
+      <Navbar expand="lg" style={{ 'backgroundColor': "#3B3B98 ", boxShadow: "2px 2px #C4C4C5" }} variant="dark">
         <Container fluid>
           <Navbar.Brand as={Link} to="#">
             KAJ
@@ -44,7 +44,7 @@ const Header = (props: IHeaderProps) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="SIP" id="basic-nav-dropdown">
+              <NavDropdown title="SIP" id="basic-nav-dropdown" >
                 <NavDropdown title="Sip Settings" id="basic-nav-dropdown" drop="end">
                   <NavDropdown.Item as={Link} to="/settings/sip-globals">
                     Global SIP Settings

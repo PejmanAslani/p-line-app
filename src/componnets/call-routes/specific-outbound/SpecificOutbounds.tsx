@@ -6,6 +6,7 @@ import {
     Diagram2,
     Gear,
     PencilFill,
+    PencilSquare,
     PersonFillAdd,
     PlusLg,
     Trash3Fill
@@ -83,7 +84,7 @@ const SpecificOutbounds = () => {
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
-        }}><PencilFill color="green" size={20} /></p>
+        }}> <PencilSquare color="green" size={17} /></p>
     }
     const User = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {

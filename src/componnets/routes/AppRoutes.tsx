@@ -18,6 +18,8 @@ import ChangePassword from "../user/ChangePassword";
 import AddGroupUsersForm from "../sip/add-group-users/AddGroupUsersForm";
 import Inbounds from "../call-routes/inbound/Inbounds";
 import InBoundsForm from "../call-routes/inbound/InboundsForm";
+import BulkDeleteUsers from "../sip/sip-users/bulk-user-edit/BulkDeleteUsers";
+import BulkEditUsers from "../sip/sip-users/bulk-user-delete/BulkEditDelete";
 
 export interface IAppRouteNode {
   path: string;
@@ -53,5 +55,7 @@ export const AppRoutes = [
   { path: "/sip-users/index", element: <SipUsers /> },
   { path: "/sip-users/create", element: <SipUsersForm /> },
   { path: "/sip-users/:id", element: <SipUsersForm /> },
+  { path: "/sip-users-bulk-delete/index", element: <BulkDeleteUsers /> },
+  { path: "/sip-users-bulk-edit/index", element: <BulkEditUsers /> },
   { path: "/change-password", element: <ChangePassword /> },
 ];

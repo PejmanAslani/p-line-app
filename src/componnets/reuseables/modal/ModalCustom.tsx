@@ -12,7 +12,7 @@ const ModalCustom = (props: any) => {
         </ModalHeader>
         <ModalBody>{props.children}</ModalBody>
         <ModalFooter>
-          <Button variant='danger' onClick={props.onHide}>EXIT</Button>
+          
         </ModalFooter>
       </Modal>
     </>

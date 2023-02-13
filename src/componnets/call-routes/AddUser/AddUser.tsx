@@ -32,7 +32,6 @@ const AddUser = (props: any) => {
         PlineTools.errorDialogMessage("Filed To Get Users");
       } else {
         setOptions({ ...options, Users: result.data.content });
-        console.log(result.data.content);
       }
     });
   };
@@ -54,8 +53,8 @@ const AddUser = (props: any) => {
         if (result.data.hasError) {
           PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
         } else {
-          props.modal(false);
           props.reload();
+          getData();
         }
       })
       .catch((error: any) => {
