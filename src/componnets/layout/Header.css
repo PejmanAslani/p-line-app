@@ -1,0 +1,15 @@
+.header {
+  margin-bottom: 20px;
+}
+
+.apply {
+  background-color: #4608ad;
+  color: rgb(255, 255, 255);
+  border-radius: 15%;
+}
+
+.apply:hover {
+  background-color: #3c1ad6;
+  color: white;
+  border-radius: 15%;
+}

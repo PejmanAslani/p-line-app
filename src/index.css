@@ -1,0 +1,42 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.dropdown-menu.show {
+  margin-top: 8px !important;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.dropdown-menu.show {
+  border-radius: 0 0 2 2 !important;
+}
+
+.dropdown-menu.show a {
+  color: #51597B;
+}
+
+.dropdown-menu.show a:hover {
+  background-color: #1B9CFC;
+  color: black;
+}
+
+.dropdown-divider {
+  background-color: aliceblue !important;
+}
+
+.Form {
+  box-shadow: 5px 10px #888888;
+}
