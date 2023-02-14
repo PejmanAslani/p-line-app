@@ -18,8 +18,8 @@ import ChangePassword from "../user/ChangePassword";
 import AddGroupUsersForm from "../sip/add-group-users/AddGroupUsersForm";
 import Inbounds from "../call-routes/inbound/Inbounds";
 import InBoundsForm from "../call-routes/inbound/InboundsForm";
-import BulkDeleteUsers from "../sip/sip-users/bulk-user-edit/BulkDeleteUsers";
-import BulkEditUsers from "../sip/sip-users/bulk-user-delete/BulkEditDelete";
+import BulkDeleteUsers from "../sip/sip-users/bulk-user-delete/BulkDeleteUsers";
+import BulkEditUsers from "../sip/sip-users/bulk-user-edit/BulkEditUsers";
 
 export interface IAppRouteNode {
   path: string;

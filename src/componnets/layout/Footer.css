@@ -1,7 +1,7 @@
 .footer {
   bottom: 0px;
   position: fixed;
-  background-color: #FFFFFF;
+  background-color: rgb(59, 59, 152);
   color: #4a525e;
   text-align: center;
   width: 100%;
@@ -9,9 +9,10 @@
   padding-top: 1.5vh;
   z-index: 100;
   left: 0px;
-  box-shadow: 2px 2px 2px 6px #8c8ce0;
+
 }
 
 .footer p {
-  font-family: Vazir;
+  font-family: Calibri;
+  color: #ddddff;
 }
