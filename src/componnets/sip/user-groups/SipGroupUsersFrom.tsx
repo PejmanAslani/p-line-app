@@ -13,7 +13,6 @@ const SipUserGroupsForm = (props: any) => {
     description: "",
   });
   const navigate = useNavigate();
-
   const saveData = (e: any) => {
     e.preventDefault();
     let url = "/sip-group-users";
@@ -29,7 +28,6 @@ const SipUserGroupsForm = (props: any) => {
         .catch((error: any) => {
           PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
         });
-
     } else {
       PlineTools.patchRequest(url, state)
         .then((result: any) => {
@@ -44,8 +42,6 @@ const SipUserGroupsForm = (props: any) => {
         });
     };
   }
-
-
 
   const getData = () => {
     const id = params.id;

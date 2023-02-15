@@ -3,13 +3,12 @@
 }
 
 .apply {
-  background-color: #7538e7;
   color: rgb(255, 255, 255);
-  border-radius: 15%;
+
 }
 
 .apply:hover {
-  background-color: #1366b3;
-  color: white;
-  border-radius: 15%;
+
+  color: rgb(185, 127, 240);
+
 }

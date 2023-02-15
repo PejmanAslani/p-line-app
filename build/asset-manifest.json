@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.db5b2714.css",
+    "main.js": "/static/js/main.fe5cf341.js",
+    "static/js/787.eada3c3a.chunk.js": "/static/js/787.eada3c3a.chunk.js",
+    "static/media/IRANSansWeb(FaNum).eot": "/static/media/IRANSansWeb(FaNum).96c836c332e8f8d83979.eot",
+    "static/media/IRANSansWeb(FaNum).ttf": "/static/media/IRANSansWeb(FaNum).cfda181b49ac22fb9f4a.ttf",
+    "static/media/Vazir-Light-FD-WOL.eot": "/static/media/Vazir-Light-FD-WOL.6cacc353ef7d7b1cadc2.eot",
+    "static/media/Vazir-Light-FD-WOL.ttf": "/static/media/Vazir-Light-FD-WOL.c8c17c8dd040b27c63c2.ttf",
+    "static/media/IRANSansWeb(FaNum).woff": "/static/media/IRANSansWeb(FaNum).4f3bc2683ce6d8e34dd7.woff",
+    "static/media/Vazir-Light-FD-WOL.woff": "/static/media/Vazir-Light-FD-WOL.6ea79b8efe0445ab1b5e.woff",
+    "static/media/user.png": "/static/media/user.5ebe4b3d21908ad98785.png",
+    "index.html": "/index.html",
+    "main.db5b2714.css.map": "/static/css/main.db5b2714.css.map",
+    "main.fe5cf341.js.map": "/static/js/main.fe5cf341.js.map",
+    "787.eada3c3a.chunk.js.map": "/static/js/787.eada3c3a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.db5b2714.css",
+    "static/js/main.fe5cf341.js"
+  ]
+}

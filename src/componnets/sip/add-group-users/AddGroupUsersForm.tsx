@@ -4,7 +4,6 @@ import TextInputCustom from '../../reuseables/TextInputCustom'
 import ToolTipCustom from '../../reuseables/tooltip/ToolTipCustom'
 import PlineTools, { TypeAlert } from '../../services/PlineTools'
 import { useNavigate, useParams } from 'react-router'
-import TextareaCustom from '../../reuseables/TextareaCustom'
 
 const AddGroupUsersForm = (props: any) => {
     const params = useParams();
@@ -70,7 +69,7 @@ const AddGroupUsersForm = (props: any) => {
     useEffect(() => {
         load();
     }, [])
-
+    // 
     return (
         <>
             <Row>
@@ -80,12 +79,11 @@ const AddGroupUsersForm = (props: any) => {
                         <hr />
                         <Row>
                             <TextInputCustom
-                                required={true}
-                                name="users-range"
-                                label="Users Range"
-                                placeholder="Example 100-120,125,127,300-310,400,402"
+                                name="range"
+                                label="Range"
                                 value={state.range}
-                                onChange={setState}
+                                placeholder="Example 100-120,125,127,300-310,400,402"
+                                setState={setState}
                             />
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="registerMode">
@@ -146,8 +144,9 @@ const AddGroupUsersForm = (props: any) => {
                             variant="primary" type="submit">
                             Save
                         </Button>
+                        {" "}
                         <Button
-                            variant="danget" onClick={()=>{navigate('/sip-users/index')}}>
+                            variant="danger" onClick={() => props.modal(false)}>
                             Exit
                         </Button>
                     </Col>

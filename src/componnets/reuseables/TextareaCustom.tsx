@@ -15,7 +15,6 @@ const TextareaCustom = (props: any) => {
                 <Form.Label>{props.label}</Form.Label>
                 <ToolTipCustom />
                 <Form.Control
-                    
                     name={props.name}
                     as={"textarea"}
                     rows={props.rows}

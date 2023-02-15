@@ -125,6 +125,7 @@ const SipUsers = () => {
                                     navigate("/sip-users/create");
                                 }}
                             ><PlusLg size={15} />New User </Dropdown.Item>
+
                             <Dropdown.Item
                                 onClick={() => {
                                     setSizeModal("lg");
@@ -132,12 +133,13 @@ const SipUsers = () => {
                                     setmodalType(<AddGroupUsersForm modal={setModalIsOpen} reload={() => reload()} />)
                                 }}
                             ><PlusLg size={15} />Bulk Addition</Dropdown.Item>
-                               <Dropdown.Item
+
+                            <Dropdown.Item
                                 onClick={() => {
                                     navigate("/sip-users-bulk-delete/index");
                                 }}
                             ><Trash size={15} />Bulk Delete</Dropdown.Item>
-                               <Dropdown.Item
+                            <Dropdown.Item
                                 onClick={() => {
                                     navigate("/sip-users-bulk-edit/index");
                                 }}
