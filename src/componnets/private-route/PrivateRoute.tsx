@@ -40,13 +40,6 @@ const PrivateRoute = (props: LogoutProps) => {
           {props.AlertView}
         </Col>
       </Row>
-
-      <Row>
-        <Col md={{ offset: 1, span: 10 }} style={{ paddingBottom: "3.5vw" }}>
-          <Outlet />
-        </Col>
-      </Row>
-
     </>
   ) : (
     <Navigate to="/login" />

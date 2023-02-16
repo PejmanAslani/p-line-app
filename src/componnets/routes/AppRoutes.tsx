@@ -20,6 +20,8 @@ import Inbounds from "../call-routes/inbound/Inbounds";
 import InBoundsForm from "../call-routes/inbound/InboundsForm";
 import BulkDeleteUsers from "../sip/sip-users/bulk-user-delete/BulkDeleteUsers";
 import BulkEditUsers from "../sip/sip-users/bulk-user-edit/BulkEditUsers";
+import Reports from "../reports/Reports";
+import OnlineView from "../online-view/OnlineView";
 
 export interface IAppRouteNode {
   path: string;
@@ -57,5 +59,7 @@ export const AppRoutes = [
   { path: "/sip-users/:id", element: <SipUsersForm /> },
   { path: "/sip-users-bulk-delete/index", element: <BulkDeleteUsers /> },
   { path: "/sip-users-bulk-edit/index", element: <BulkEditUsers /> },
-  { path: "/change-password", element: <ChangePassword /> },
+  { path: "/change-password/index", element: <ChangePassword /> },
+  { path: "/call-reports/index", element: <Reports /> },
+  { path: "/online-view/index", element: <OnlineView /> },
 ];

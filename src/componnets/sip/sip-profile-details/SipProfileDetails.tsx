@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Form, Row, Tabs } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
-import PlineTools, { TypeAlert, TypeMessage } from "../../services/PlineTools";
+import PlineTools, { TypeAlert } from "../../services/PlineTools";
 
 const SipProfileDetails = () => {
   const profileParam = useParams();
@@ -15,7 +15,7 @@ const SipProfileDetails = () => {
     contact: [],
     aor: [],
   });
-  const [state, setState] = useState<any>();
+  const [state, setState] = useState<any>({});
   const [key, setKey] = useState("endpoint");
   const navigate = useNavigate();
 
@@ -82,13 +82,13 @@ const SipProfileDetails = () => {
             <Form.Group className="mb-3" controlId={v[0]}>
               <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
               <Select
-                isMulti={v[5] == undefined ? false : v[5]}
+                isMulti={v[5] === undefined ? false : v[5]}
                 options={obj}
                 defaultValue={select}
                 onChange={(e) => {
                   let tmp = { ...state };
                   if (Array.isArray(e)) {
-                    let arr :any[]=[];
+                    let arr: any[] = [];
                     e.forEach((val) => {
                       arr.push(val.value);
                     });
@@ -96,7 +96,8 @@ const SipProfileDetails = () => {
                   } else {
                     tmp[_type][v[0]] = e.value;
                   }
-                  setState(tmp);
+                  setState(tmp)
+
                 }}
               />
               <Form.Text className="text-muted">{v[4]}</Form.Text>
@@ -130,7 +131,7 @@ const SipProfileDetails = () => {
         </Row>
       );
     } else if (v[1] == "Integer") {
-      if (state[_type][v[0]] == undefined) {
+      if (state[_type][v[0]] === undefined) {
         select = v[3];
       } else {
         select = state[_type][v[0]];
@@ -156,7 +157,7 @@ const SipProfileDetails = () => {
         </Row>
       );
     } else {
-      if (state[_type][v[0]] == undefined) {
+      if (state[_type][v[0]] === undefined) {
         select = v[3];
       } else {
         select = state[_type][v[0]];
@@ -185,7 +186,7 @@ const SipProfileDetails = () => {
     }
   };
 
-  const submit = (e:any) => {
+  const submit = (e: any) => {
     e.preventDefault();
     state.id = profileParam.id;
     PlineTools.postRequest("/sip-profile-details/save", state)
@@ -193,13 +194,13 @@ const SipProfileDetails = () => {
         if (result.status) {
           PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator", true)
         } else {
-          PlineTools.successDialogMessage("Information successfully recorded",true)
+          PlineTools.successDialogMessage("Information successfully recorded", true)
           navigate("/sip-profiles/index");
         }
       })
       .catch((error) => {
         PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator\n" +
-        error,true)
+          error, true)
       });
   };
 
@@ -209,7 +210,7 @@ const SipProfileDetails = () => {
         <Tabs
           id="controlled-tab"
           activeKey={key}
-          onSelect={(k:any) => setKey(k)}
+          onSelect={(k: any) => setKey(k)}
           className="mb-3"
         >
           <Tab eventKey="endpoint" title="Endpoint">

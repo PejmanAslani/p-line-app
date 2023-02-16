@@ -36,6 +36,7 @@ const DataGrid = (props: any) => {
             <AgGridReact
                 ref={gridRef}
                 gridOptions={gridOptions}
+                onGridReady={hideLoading}
                 onRowDragEnd={props.dragSort}
                 rowData={props.rowData}
                 defaultColDef={defaultColDef}

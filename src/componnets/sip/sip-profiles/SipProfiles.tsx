@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
-import { PencilSquare, PlusLg, Trash3Fill } from "react-bootstrap-icons";
+import { PencilSquare, PlusLg, Sliders2, Sliders2Vertical, Trash3Fill } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import ModalCustom from "../../reuseables/modal/ModalCustom";
 import { Button, Col, Row } from "react-bootstrap";
@@ -75,6 +75,16 @@ const SipProfiles = () => {
       </p>
     );
   };
+  function Parameters(params: any) {
+    let id = params.node.data.id;
+    return (
+      <p style={{ cursor: "pointer" }} onClick={() => {
+        navigate("/sip-profile-details/" + id);
+      }}>
+        <Sliders2Vertical size={18} color="#FF5733" />
+      </p>
+    );
+  }
   function DeleteRow(e: any) {
     return (
       <p
@@ -109,7 +119,7 @@ const SipProfiles = () => {
       headerName: "Row"
     },
     { field: "name", headerName: "Name" },
-
+    { field: "sipProfileParameters", headerName: "Parameters", cellRenderer: Parameters },
     {
       field: "enable",
       headerName: "Enable",

@@ -20,7 +20,6 @@ const GlobalOutbounds1 = () => {
     const [sizeModal, setSizeModal] = useState("")
     const saveChanges = (data: any) => {
         let url = "/outbound-routes";
-        console.log(data);
         PlineTools.patchRequest(url, data)
             .then((result) => {
                 if (result.data.hasError) {
@@ -38,9 +37,7 @@ const GlobalOutbounds1 = () => {
         PlineTools.getRequest(
             `/outbound-routes/?page=${page}&size=${size}`)
             .then((data) => {
-                console.log(data.data.content);
                 setRowData(data.data.content.filter(((privateRoute: any) => privateRoute.privateRoute === false)));
-
             })
             .catch((error) => {
                 PlineTools.errorDialogMessage(
@@ -68,7 +65,7 @@ const GlobalOutbounds1 = () => {
 
     const Edit = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -77,7 +74,7 @@ const GlobalOutbounds1 = () => {
 
     const Pattern = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+  
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddPattern id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -85,7 +82,7 @@ const GlobalOutbounds1 = () => {
     }
     const Trunk = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+ 
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddTrunks id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
