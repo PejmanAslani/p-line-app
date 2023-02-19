@@ -11,20 +11,16 @@ const AddGroupUsersForm = (props: any) => {
         id: null,
         range: "",
         passwordType: "",
-        sipGroup: {
-            id: 0
-        },
-        sipProfile: {
-            id: 0
-        },
+        sipGroup: 0,
+        sipProfile: 0,
     });
     const saveData = (e: any) => {
         e.preventDefault();
-        if (state.sipProfile.id === 0) {
+        if (state.sipProfile === 0) {
             PlineTools.showAlert(["SIP Profile not selected."], TypeAlert.Danger);
             return;
         }
-        let url = "/sip-users";
+        let url = "/add-group-sip-users";
         PlineTools.postRequest(url, state)
             .then((result) => {
                 if (result.data.hasError) {
@@ -108,9 +104,9 @@ const AddGroupUsersForm = (props: any) => {
                                     <Form.Label>SipGroup</Form.Label>
                                     <ToolTipCustom />
                                     <select
-                                        value={state.sipGroup.id}
+                                        value={state.sipGroup}
                                         onChange={(e) => {
-                                            setState({ ...state, sipGroup: { id: parseInt(e.target.value) } })
+                                            setState({ ...state, sipGroup: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
                                         {options.map((opt: any) => (
@@ -126,9 +122,9 @@ const AddGroupUsersForm = (props: any) => {
                                     <Form.Label>SipProfiles</Form.Label>
                                     <ToolTipCustom />
                                     <select
-                                        value={state.sipProfile.id}
+                                        value={state.sipProfile}
                                         onChange={(e) => {
-                                            setState({ ...state, sipProfile: { id: parseInt(e.target.value) } })
+                                            setState({ ...state, sipProfile: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
                                         {options.map((opt: any) => (

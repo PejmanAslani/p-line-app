@@ -16,3 +16,17 @@
   font-family: Calibri;
   color: #ddddff;
 }
+
+@media(max-width: 767px) {
+  body {
+    margin-bottom: 100px;
+  }
+
+  .footer {
+    height: 100px;
+  }
+
+  .footer p {
+    font-size: 15px;
+  }
+}

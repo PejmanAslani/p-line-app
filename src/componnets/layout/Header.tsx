@@ -16,7 +16,7 @@ const Header = (props: IHeaderProps) => {
   const [menu, setMenu] = useState([null]);
   const navDropdownTitle = (
     <>
-      <PersonCircle /> {props.fullname}
+      <PersonCircle />
     </>
   );
 
@@ -41,7 +41,7 @@ const Header = (props: IHeaderProps) => {
     <div className='main-container d-flex'>
       <SideBar />
       <div className='content'>
-        <Navbar expand="lg" style={{ 'backgroundColor': "#3B3B98 ", boxShadow: "2px 2px #C4C4C5" }} variant="dark">
+        <Navbar className="text-white" expand="lg" style={{ backgroundColor: "#3B3B98 ", boxShadow: "2px 2px #C4C4C5" }} variant="dark">
           <Container fluid>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -95,8 +95,11 @@ const Header = (props: IHeaderProps) => {
                 <Nav.Link onClick={() => { navigate("/online-view/index") }} >Online View</Nav.Link>
               </Nav>
               <Nav>
-                <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/user/change-password">
+                <NavDropdown className="nav-left" title={navDropdownTitle} id="basic-nav-dropdown dropleft" >
+                  <NavDropdown.Item >
+                    {props.fullname}
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/change-password/index">
                     Change Password
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={() => { props.LogoutAction(); }}>

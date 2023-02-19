@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 import SipTrunkForm from "./SipTrunkForm";
-import { Gear, PencilFill, PencilSquare, PlusLg, Trash3Fill } from "react-bootstrap-icons";
+import { CheckLg, Gear, PencilFill, PencilSquare, PlusLg, Trash3Fill, XLg } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import ModalCustom from "../../reuseables/modal/ModalCustom";
 import { Button, Col, Dropdown, Row } from "react-bootstrap";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 const SipTrunks = () => {
   const navigate = useNavigate();
-  const gridStyle = useMemo(() => ({ height: 600, width: "100%" }), []);
+  const gridStyle = useMemo(() => ({ height: 580, width: "100%" }), []);
   const [rowData, setRowData] = useState<any>([]);
 
   const saveChanges = (data: any) => {
@@ -49,58 +49,30 @@ const SipTrunks = () => {
   };
 
   function CheckBox(params: any) {
-    return (
-      <input
-        style={{ cursor: "pointer" }}
-        type="checkbox"
-        checked={params.value}
-        onChange={(e: any) => {
-          const value = e.target.checked;
-          let colId = params.column.colId;
-          params.node.setDataValue(colId, value);
-          saveChanges(params.node.data);
-        }}
-      />
+    return params.node.data.enable ? <CheckLg color='#6BBD49' size={19} /> : <XLg color='red' size={19} />;
+  }
+  const actions = (params: any) => {
+    let id = params.node.data.id;
+    return (<>
+      <PencilSquare color="green" size={17} onClick={() => { navigate("/sip-trunks/edit/" + id) }} />
+      <Trash3Fill style={{ paddingLeft: "8px" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
+    </>
     );
   }
-
-  const Edit = (params: any) => {
-    let id = params.node.data.id;
-    return (
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          navigate("/sip-trunks/edit/" + id);
-        }}
-      >
-        <PencilSquare color="green" size={17} />
-      </p>
-    );
-  };
   function DeleteRow(e: any) {
-    return (
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          if (window.confirm("Are you sure you want to delete this Profile?")) {
-            e.api.applyTransaction({
-              remove: [e.node.data],
-            });
-            PlineTools.deleteRequest("/sip-trunks/", e.node.data.id).then(
-              (result) => {
-                if (result.data.hasError) {
-                  PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-                } else {
-                  getData();
-                }
-              }
-            );
-          }
-        }}
-      >
-        <Trash3Fill color="red" />
-      </p>
-    );
+    if (window.confirm("Are you sure you want to delete this Profile?")) {
+      e.api.applyTransaction({
+        remove: [e.node.data],
+      });
+      PlineTools.deleteRequest("/sip-trunks/", e.node.data.id).then((result) => {
+        if (result.data.hasError) {
+          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+        } else {
+
+          getData();
+        }
+      });
+    }
   }
 
   const columns = [
@@ -111,26 +83,19 @@ const SipTrunks = () => {
     { field: "username", headerName: "UserName" },
     {
       field: "enable",
-      headerName: "Enable",
+      headerName: "Status",
       width: 30,
       cellRenderer: CheckBox,
     },
     {
       field: "edit",
-      headerName: "Edit",
+      headerName: "Options",
       width: 30,
-      cellRenderer: Edit,
+      cellRenderer: actions,
       filter: false,
       sortable: false,
     },
-    {
-      field: "delete",
-      headerName: "Delete",
-      width: 30,
-      cellRenderer: DeleteRow,
-      filter: false,
-      sortable: false,
-    },
+
   ];
   return (
     <div style={{ width: "100%", height: "100%" }}>

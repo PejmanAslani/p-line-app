@@ -1,21 +1,26 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DataGrid from '../../grid-view/DataGrid/DataGrid'
 import {
+    Check,
+    CheckLg,
     PencilSquare,
     PlusLg,
     Trash,
-    Trash3Fill
+    Trash3Fill,
+    X,
+    XLg
 } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
 import { Col, Dropdown, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import AddGroupUsersForm from '../add-group-users/AddGroupUsersForm';
+import BulkDeleteUsers from './bulk-user-delete/BulkDeleteUsers';
 
 const SipUsers = () => {
     const navigate = useNavigate();
     const [overlay, setOverlay] = useState(false);
-    const gridStyle = useMemo(() => ({ height: 600, width: '100%' }), []);
+    const gridStyle = useMemo(() => ({ height: 580, width: '100%' }), []);
     const [rowData, setRowData] = useState<any>([]);
     //Modal Hooks
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -57,53 +62,42 @@ const SipUsers = () => {
     }
 
     function CheckBox(params: any) {
-        return <input style={{ cursor: "pointer" }} type="checkbox" checked={params.value} onChange={(e: any) => {
-            const value = e.target.checked;
-            let colId = params.column.colId;
-            params.node.setDataValue(colId, value);
-            saveChanges(params.node.data)
-        }} />
+        return params.node.data.enable ? <CheckLg color='#6BBD49' size={19} /> : <XLg color='red' size={19} />;
     }
-
-    const Edit = (params: any) => {
+    const actions = (params: any) => {
         let id = params.node.data.id;
-        return <p style={{ cursor: "pointer" }} onClick={() => {
-            navigate("/sip-users/edit/" + id);
-        }}><PencilSquare color="green" size={17} /></p>
+        return (<>
+            <PencilSquare color="green" size={17} onClick={() => { navigate("/sip-users/edit/" + id) }} />
+            <Trash3Fill style={{ paddingLeft: "8px" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
+        </>
+        );
     }
     function DeleteRow(e: any) {
-        return <p style={{ cursor: "pointer" }} onClick={
-            () => {
+        if (window.confirm("Are you sure you want to delete this Profile?")) {
+            e.api.applyTransaction({
+                remove: [e.node.data],
+            });
+            PlineTools.deleteRequest("/sip-users/", e.node.data.id).then((result) => {
+                if (result.data.hasError) {
+                    PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+                } else {
 
-                if (window.confirm("Are you sure you want to delete this Profile?")) {
-                    e.api.applyTransaction({
-                        remove: [e.node.data],
-                    });
-                    PlineTools.deleteRequest("/sip-users/", e.node.data.id).then((result) => {
-                        if (result.data.hasError) {
-                            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-                        } else {
-
-                            getData();
-                        }
-                    });
+                    getData();
                 }
-            }
-        }>
-            <Trash3Fill color="red" /></p>
+            });
+        }
     }
 
     const columns = [
-        { field: 'row', valueGetter: "node.rowIndex + 1", headerName: 'Row', width: 60 },
-        { field: 'uid', headerName: 'User', width: 120 },
+        { field: 'row', valueGetter: "node.rowIndex + 1", headerName: 'Row', width: "150" },
+        { field: 'uid', headerName: 'User', },
 
-        { field: 'sipProfile.name', headerName: 'Sip Profile' },
-        { field: 'sipUserGroup.name', headerName: 'Group' },
+        { field: 'sipProfile.name', headerName: 'Sip Profile', width: "250" },
+        { field: 'sipUserGroup.name', headerName: 'Sip Group', width: "300" },
         {
-            field: 'enable', headerName: 'Enable', width: 30, cellRenderer: CheckBox,
+            field: 'enable', headerName: 'Status', cellRenderer: CheckBox, width: "280"
         },
-        { field: 'edit', headerName: 'Edit', cellRenderer: Edit, filter: false, sortable: false },
-        { field: 'delete', headerName: 'Delete', cellRenderer: DeleteRow, filter: false, sortable: false },
+        { field: 'delete', headerName: 'Options', cellRenderer: actions, filter: false, sortable: false, width: "250" },
 
     ];
     return (
@@ -136,7 +130,10 @@ const SipUsers = () => {
 
                             <Dropdown.Item
                                 onClick={() => {
-                                    navigate("/sip-users-bulk-delete/index");
+                                    setSizeModal("lg");
+                                    setModalIsOpen(true);
+                                    setmodalType(<BulkDeleteUsers modal={setModalIsOpen} reload={() => { reload() }} />)
+
                                 }}
                             ><Trash size={15} />Bulk Delete</Dropdown.Item>
                             <Dropdown.Item
@@ -150,6 +147,7 @@ const SipUsers = () => {
             </Row>
             <br />
             <DataGrid
+                flex={0}
                 gridRef
                 overlay={overlay}
                 dnd={false}

@@ -46,7 +46,7 @@ const AddUser = (props: any) => {
   };
   const AddUser = (e: any) => {
     e.preventDefault();
-    let url = "/outbound-route-users/" + props.id;
+    let url = props.urlUser + props.id;
     var data: any[] = [state].concat(rowData);
     PlineTools.postRequest(url, data)
       .then((result: any) => {

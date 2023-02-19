@@ -9,7 +9,7 @@ import AddPattern from '../AddPattern/AddPattern';
 import AddTrunks from '../AddTrunk/AddTrunks';
 import { useNavigate } from 'react-router';
 
-const GlobalOutbounds1 = () => {
+const GlobalOutbounds = () => {
     const gridStyle = useMemo(() => ({ height: 500, width: '100%' }), []);
     const pageSize = 10;
     const [rowData, setRowData] = useState<any>([]);
@@ -77,7 +77,7 @@ const GlobalOutbounds1 = () => {
   
             setSizeModal("lg");
             setModalIsOpen(true);
-            setmodalType(< AddPattern id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            setmodalType(< AddPattern urlPattern="/outbound-route-patterns/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}><Diagram2 color="orange" size={22} /></p>
     }
     const Trunk = (params: any) => {
@@ -85,7 +85,7 @@ const GlobalOutbounds1 = () => {
  
             setSizeModal("lg");
             setModalIsOpen(true);
-            setmodalType(< AddTrunks id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            setmodalType(< AddTrunks urlTrunk="/outbound-route-trunks/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}><BuildingGear color="blue" size={20} /></p>
     }
     function DeleteRow(e: any) {
@@ -155,4 +155,4 @@ const GlobalOutbounds1 = () => {
     )
 }
 
-export default GlobalOutbounds1
+export default GlobalOutbounds

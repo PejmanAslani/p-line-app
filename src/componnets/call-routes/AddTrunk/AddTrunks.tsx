@@ -66,7 +66,7 @@ const AddTrunks = (props: any) => {
   const saveChanges = (data: any) => {
     let RouteID = props.id;
     setState({ ...state, outboundRoute: { id: RouteID } });
-    let url = "/outbound-route-trunks/" + RouteID;
+    let url = props.urlTrunk + RouteID;
     PlineTools.postRequest(url, data)
       .then((result) => {
         if (result.data.hasError) {

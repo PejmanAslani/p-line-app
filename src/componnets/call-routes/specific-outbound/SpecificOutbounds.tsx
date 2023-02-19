@@ -91,7 +91,7 @@ const SpecificOutbounds = () => {
             console.log(params);
             setSizeModal("lg");
             setModalIsOpen(true);
-            setmodalType(< AddUser id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            setmodalType(< AddUser urlUser="/outbound-route-users/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}><PersonFillAdd color="purple" size={22} /></p>
     }
     const Pattern = (params: any) => {
@@ -99,7 +99,7 @@ const SpecificOutbounds = () => {
             console.log(params);
             setSizeModal("lg");
             setModalIsOpen(true);
-            setmodalType(< AddPattern id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            setmodalType(< AddPattern urlPattern="/outbound-route-patterns/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}><Diagram2 color="orange" size={24} /></p>
     }
     const Trunk = (params: any) => {
@@ -107,7 +107,7 @@ const SpecificOutbounds = () => {
             console.log(params);
             setSizeModal("lg");
             setModalIsOpen(true);
-            setmodalType(< AddTrunks id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            setmodalType(< AddTrunks urlTrunk="/outbound-route-trunks/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}><BuildingGear color="blue" size={20} /></p>
     }
     function DeleteRow(e: any) {

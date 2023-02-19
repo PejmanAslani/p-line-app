@@ -68,8 +68,6 @@ const GlobalOutboundsForm = (props: any) => {
     console.log(props.id);
 
   }, []);
-
-
   return (
     <Row>
       <Col md={{ span: 8, offset: 2 }}>
@@ -92,9 +90,6 @@ const GlobalOutboundsForm = (props: any) => {
               setState={setState}
               require={true}
             />
-
-
-
             <TextareaCustom
               name="description"
               label="Description"

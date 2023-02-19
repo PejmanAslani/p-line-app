@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import TextInputCustom from "../../reuseables/TextInputCustom";
-import {  PlusLg, Trash3Fill } from "react-bootstrap-icons";
+import { PlusLg, Trash3Fill } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 
@@ -40,7 +40,7 @@ function AddPattern(props: any) {
   const saveChanges = (data: any) => {
     let RouteID = props.id;
     setState({ ...state, outboundRoute: { id: RouteID } });
-    let url = "/outbound-route-patterns/" + RouteID;
+    let url = props.urlPattern + RouteID;
     PlineTools.postRequest(url, data)
       .then((result) => {
         if (result.data.hasError) {

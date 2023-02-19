@@ -6,9 +6,9 @@ const Home = () => {
     <div style={{ textAlign: "center" }}>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
-  
-            <h5>Welcome Kaj Call Center Manager</h5>
-  
+
+
+
         </Col>
 
       </Row>

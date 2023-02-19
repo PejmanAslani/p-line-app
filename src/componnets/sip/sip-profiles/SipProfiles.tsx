@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
-import { PencilSquare, PlusLg, Sliders2, Sliders2Vertical, Trash3Fill } from "react-bootstrap-icons";
+import { CheckLg, PencilSquare, PlusLg, Sliders2, Sliders2Vertical, Trash3Fill, XLg } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import ModalCustom from "../../reuseables/modal/ModalCustom";
 import { Button, Col, Row } from "react-bootstrap";
@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const SipProfiles = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const gridStyle = useMemo(() => ({ height: 600, width: "100%" }), []);
+  const gridStyle = useMemo(() => ({ height: 580, width: "100%" }), []);
   const [rowData, setRowData] = useState<any>([]);
   const saveChanges = (data: any) => {
     let url = "/sip-profiles";
@@ -46,35 +46,6 @@ const SipProfiles = () => {
   const reload = () => {
     getData();
   };
-
-  function CheckBox(params: any) {
-    return (
-      <input
-        style={{ cursor: "pointer" }}
-        type="checkbox"
-        checked={params.value}
-        onChange={(e: any) => {
-          const value = e.target.checked;
-          let colId = params.column.colId;
-          params.node.setDataValue(colId, value);
-          saveChanges(params.node.data);
-        }}
-      />
-    );
-  }
-  const Edit = (params: any) => {
-    let id = params.node.data.id;
-    return (
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          navigate("/sip-profiles/edit/" + id);
-        }}
-      >
-        <PencilSquare color="green" size={17} />
-      </p>
-    );
-  };
   function Parameters(params: any) {
     let id = params.node.data.id;
     return (
@@ -85,30 +56,31 @@ const SipProfiles = () => {
       </p>
     );
   }
-  function DeleteRow(e: any) {
-    return (
-      <p
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          if (window.confirm("Are you sure you want to delete this Profile?")) {
-            e.api.applyTransaction({
-              remove: [e.node.data],
-            });
-            PlineTools.deleteRequest("/sip-profiles/", e.node.data.id).then(
-              (result) => {
-                if (result.data.hasError) {
-                  PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-                } else {
-                  getData();
-                }
-              }
-            );
-          }
-        }}
-      >
-        <Trash3Fill color="red" />
-      </p>
+  function CheckBox(params: any) {
+    return params.node.data.enable ? <CheckLg color='#6BBD49' size={19} /> : <XLg color='red' size={19} />;
+  }
+  const actions = (params: any) => {
+    let id = params.node.data.id;
+    return (<>
+      <PencilSquare color="green" size={17} onClick={() => { navigate("/sip-users/edit/" + id) }} />
+      <Trash3Fill style={{ paddingLeft: "8px" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
+    </>
     );
+  }
+  function DeleteRow(e: any) {
+    if (window.confirm("Are you sure you want to delete this Profile?")) {
+      e.api.applyTransaction({
+        remove: [e.node.data],
+      });
+      PlineTools.deleteRequest("/sip-users/", e.node.data.id).then((result) => {
+        if (result.data.hasError) {
+          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+        } else {
+
+          getData();
+        }
+      });
+    }
   }
 
   const columns = [
@@ -122,21 +94,17 @@ const SipProfiles = () => {
     { field: "sipProfileParameters", headerName: "Parameters", cellRenderer: Parameters },
     {
       field: "enable",
-      headerName: "Enable",
+      headerName: "Status",
       cellRenderer: CheckBox,
     },
     {
       field: "edit",
-      cellRenderer: Edit,
+      headerName: "Options",
+      cellRenderer: actions,
       filter: false,
       sortable: false,
     },
-    {
-      field: "delete",
-      cellRenderer: DeleteRow,
-      filter: false,
-      sortable: false,
-    },
+
   ];
   return (
     <div style={{ width: "100%", height: "100%" }}>
