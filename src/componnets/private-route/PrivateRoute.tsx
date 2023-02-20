@@ -28,6 +28,7 @@ const PrivateRoute = (props: LogoutProps) => {
   return PlineTools.getCookies("token") != undefined ? (
     <>
       <Header
+         AlertView={props.AlertView}
         fullname={getFullaname()}
         LogoutAction={() => {
           if (window.confirm("Are you sure you want to leave?"))
@@ -37,7 +38,7 @@ const PrivateRoute = (props: LogoutProps) => {
 
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
-          {props.AlertView}
+          
         </Col>
       </Row>
     </>

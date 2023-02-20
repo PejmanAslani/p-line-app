@@ -11,7 +11,7 @@ import { Container } from 'react-bootstrap';
 
 
 const DataGrid = (props: any) => {
-
+    
     const gridRef = useRef<AgGridReact>(null);
     const defaultColDef = useMemo(() => {
         return {

@@ -18,14 +18,12 @@ const AddGroupUsersForm = (props: any) => {
         e.preventDefault();
         if (state.sipProfile === 0) {
             PlineTools.showAlert(["SIP Profile not selected."], TypeAlert.Danger);
-            console.log("error")
             return;
         }
         let url = "/sip-users/add-group-sip-users";
         PlineTools.postRequest(url, state)
             .then((result) => {
                 if (result.data.hasError) {
-                    console.log(state)
                     PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                 } else {
                     props.modal(false);

@@ -10,6 +10,7 @@ import SideBar from "./SideBar";
 interface IHeaderProps {
   LogoutAction: Function;
   fullname: string;
+  AlertView: any
 }
 
 const Header = (props: IHeaderProps) => {
@@ -119,6 +120,7 @@ const Header = (props: IHeaderProps) => {
           </Container>
         </Navbar>
         <div className="dashboard-content px-3 pt-4" style={{ paddingBottom: "3.5vw" }}>
+          {props.AlertView}
           <Outlet />
         </div>
       </div>

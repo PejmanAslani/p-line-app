@@ -27,7 +27,7 @@ interface ILoginObject {
 const App = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<boolean>(false);
-  
+
   const [dialog, setDialog] = useState({
     isShow: false,
     message: "",
@@ -87,7 +87,7 @@ const App = () => {
           break;
       }
     }
-    
+
     PlineTools.appAlert = (messages: string[], variant: TypeAlert, timeOut = 0) => {
       setAlert({
         messages: messages,
@@ -124,54 +124,53 @@ const App = () => {
 
   return (
     <div>
-      
-          <Modal
-            show={dialog.isShow}
-            centered
-            onHide={() => { setDialog({ ...dialog, isShow: false }); }}
-            backdrop={dialog.backdrop}
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>{dialog.icon} {dialog.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{dialog.message}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={() => {
-                setDialog({ ...dialog, isShow: false });
-              }}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <Routes>
-            <Route element={<PrivateRoute LogoutAction={logout} AlertView={alert.isShow &&
-              <Alert variant={alert.variant}>
-                {alert.messages.length == 1 &&
-                  <span>{alert.messages[0]}</span>
-                }
-                {alert.messages.length > 1 &&
-                  <ul>
-                    {alert.messages.map((v: string, i) => {
-                      return (<li key={i}>{v}</li>);
-                    })}
-                  </ul>
-                }
-              </Alert>
-            } />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              {AppRoutes.map((v: IAppRouteNode, i: number) => {
-                return <Route key={i} path={v.path} element={v.element} />;
-              })}
-            </Route>
+      <Modal
+        show={dialog.isShow}
+        centered
+        onHide={() => { setDialog({ ...dialog, isShow: false }); }}
+        backdrop={dialog.backdrop}
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{dialog.icon} {dialog.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{dialog.message}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => {
+            setDialog({ ...dialog, isShow: false });
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Routes>
+        <Route element={<PrivateRoute LogoutAction={logout} AlertView={alert.isShow &&
+          <Alert variant={alert.variant}>
+            {alert.messages.length == 1 &&
+              <span>{alert.messages[0]}</span>
+            }
+            {alert.messages.length > 1 &&
+              <ul>
+                {alert.messages.map((v: string, i) => {
+                  return (<li key={i}>{v}</li>);
+                })}
+              </ul>
+            }
+          </Alert>
+        } />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          {AppRoutes.map((v: IAppRouteNode, i: number) => {
+            return <Route key={i} path={v.path} element={v.element} />;
+          })}
+        </Route>
 
-            <Route path="/login" element={<Login LoginAction={login} />} />
-            <Route path="/notfound" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/notfound" />} />
-          </Routes>
-          <Footer />
-      
+        <Route path="/login" element={<Login LoginAction={login} />} />
+        <Route path="/notfound" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/notfound" />} />
+      </Routes>
+      <Footer />
+
     </div>
 
   );
