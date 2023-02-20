@@ -9,9 +9,9 @@ const AddGroupUsersForm = (props: any) => {
     const params = useParams();
     const [state, setState] = useState({
         range: "",
-        passwordType: "",
-        sipGroup: 0,
-        sipProfile: 0,
+        passwordType: "NoPassword",
+        sipGroup: 1,
+        sipProfile: 1,
     });
     const saveData = (e: any) => {
 

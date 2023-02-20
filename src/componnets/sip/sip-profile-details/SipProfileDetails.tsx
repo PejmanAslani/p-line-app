@@ -1,4 +1,4 @@
-import { Button, Tab } from "react-bootstrap";
+import { Button, Container, Tab } from "react-bootstrap";
 
 import React, { useEffect, useState } from "react";
 import { Col, Form, Row, Tabs } from "react-bootstrap";
@@ -77,33 +77,39 @@ const SipProfileDetails = () => {
       });
 
       return (
-        <Row key={i}>
-          <Col>
-            <Form.Group className="mb-3" controlId={v[0]}>
-              <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
-              <Select
-                isMulti={v[5] === undefined ? false : v[5]}
-                options={obj}
-                defaultValue={select}
-                onChange={(e) => {
-                  let tmp = { ...state };
-                  if (Array.isArray(e)) {
-                    let arr: any[] = [];
-                    e.forEach((val) => {
-                      arr.push(val.value);
-                    });
-                    tmp[_type][v[0]] = JSON.stringify(arr);
-                  } else {
-                    tmp[_type][v[0]] = e.value;
-                  }
-                  setState(tmp)
+        <Container>
+          <Row key={i}>
+            <Col>
+              <Row>
+                <Col md={4}>
+                  <Form.Group className="mb-3" controlId={v[0]}>
+                    <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
+                    <Select
+                      isMulti={v[5] === undefined ? false : v[5]}
+                      options={obj}
+                      defaultValue={select}
+                      onChange={(e) => {
+                        let tmp = { ...state };
+                        if (Array.isArray(e)) {
+                          let arr: any[] = [];
+                          e.forEach((val) => {
+                            arr.push(val.value);
+                          });
+                          tmp[_type][v[0]] = JSON.stringify(arr);
+                        } else {
+                          tmp[_type][v[0]] = e.value;
+                        }
+                        setState(tmp)
 
-                }}
-              />
-              <Form.Text className="text-muted">{v[4]}</Form.Text>
-            </Form.Group>
-          </Col>
-        </Row>
+                      }}
+                    />
+                    <Form.Text className="text-muted">{v[4]}</Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       );
     } else if (v[1] == "Boolean") {
       if (state[_type][v[0]] == undefined) {
@@ -112,23 +118,29 @@ const SipProfileDetails = () => {
         select = state[_type][v[0]];
       }
       return (
-        <Row key={i}>
-          <Col>
-            <Form.Group className="mb-3" controlId={v[0]}>
-              <Form.Check
-                type="checkbox"
-                label={PlineTools.stringToLabel(v[0])}
-                defaultChecked={select}
-                onChange={(e) => {
-                  let tmp = { ...state };
-                  tmp[_type][v[0]] = e.target.value;
-                  setState(tmp);
-                }}
-              />
-              <Form.Text className="text-muted">{v[4]}</Form.Text>
-            </Form.Group>
-          </Col>
-        </Row>
+        <Container>
+          <Row key={i}>
+            <Col>
+              <Row>
+                <Col md={4}>
+                  <Form.Group className="mb-3" controlId={v[0]}>
+                    <Form.Check
+                      type="checkbox"
+                      label={PlineTools.stringToLabel(v[0])}
+                      defaultChecked={select}
+                      onChange={(e) => {
+                        let tmp = { ...state };
+                        tmp[_type][v[0]] = e.target.value;
+                        setState(tmp);
+                      }}
+                    />
+                    <Form.Text className="text-muted">{v[4]}</Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       );
     } else if (v[1] == "Integer") {
       if (state[_type][v[0]] === undefined) {
@@ -137,24 +149,30 @@ const SipProfileDetails = () => {
         select = state[_type][v[0]];
       }
       return (
-        <Row key={i}>
-          <Col>
-            <Form.Group className="mb-3" controlId={v[0]}>
-              <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
-              <Form.Control
-                type="number"
-                name={v[0]}
-                defaultValue={select}
-                onChange={(e) => {
-                  let tmp = { ...state };
-                  tmp[_type][v[0]] = e.target.value;
-                  setState(tmp);
-                }}
-              />
-              <Form.Text className="text-muted">{v[4]}</Form.Text>
-            </Form.Group>
-          </Col>
-        </Row>
+        <Container>
+          <Row key={i}>
+            <Col>
+              <Row>
+                <Col md={4}>
+                  <Form.Group className="mb-3" controlId={v[0]}>
+                    <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name={v[0]}
+                      defaultValue={select}
+                      onChange={(e) => {
+                        let tmp = { ...state };
+                        tmp[_type][v[0]] = e.target.value;
+                        setState(tmp);
+                      }}
+                    />
+                    <Form.Text className="text-muted">{v[4]}</Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       );
     } else {
       if (state[_type][v[0]] === undefined) {
@@ -164,24 +182,31 @@ const SipProfileDetails = () => {
       }
 
       return (
-        <Row key={i}>
-          <Col>
-            <Form.Group className="mb-3" controlId={v[0]}>
-              <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
-              <Form.Control
-                type="text"
-                name={v[0]}
-                defaultValue={select}
-                onChange={(e) => {
-                  let tmp = { ...state };
-                  tmp[_type][v[0]] = e.target.value;
-                  setState(tmp);
-                }}
-              />
-              <Form.Text className="text-muted">{v[4]}</Form.Text>
-            </Form.Group>
-          </Col>
-        </Row>
+        <Container>
+          <Row key={i}>
+
+            <Col>
+              <Row>
+                <Col md={4}>
+                  <Form.Group className="mb-3" controlId={v[0]}>
+                    <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name={v[0]}
+                      defaultValue={select}
+                      onChange={(e) => {
+                        let tmp = { ...state };
+                        tmp[_type][v[0]] = e.target.value;
+                        setState(tmp);
+                      }}
+                    />
+                    <Form.Text className="text-muted">{v[4]}</Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       );
     }
   };
@@ -205,54 +230,56 @@ const SipProfileDetails = () => {
   };
 
   return (
-    <div>
-      <Form onSubmit={submit}>
-        <Tabs
-          id="controlled-tab"
-          activeKey={key}
-          onSelect={(k: any) => setKey(k)}
-          className="mb-3"
-        >
-          <Tab eventKey="endpoint" title="Endpoint">
-            {params.endpoint.map((v, i) => {
-              return draw("endpoint", v, i);
-            })}
-          </Tab>
-          <Tab eventKey="auth" title="Auth">
-            {params.auth.map((v, i) => {
-              return draw("auth", v, i);
-            })}
-          </Tab>
-          <Tab eventKey="transport" title="Transport">
-            {params.transport.map((v, i) => {
-              return draw("transport", v, i);
-            })}
-          </Tab>
-          <Tab eventKey="contact" title="Contact">
-            {params.contact.map((v, i) => {
-              return draw("contact", v, i);
-            })}
-          </Tab>
-          <Tab eventKey="aor" title="AOR">
-            {params.aor.map((v, i) => {
-              return draw("aor", v, i);
-            })}
-          </Tab>
-        </Tabs>
-        <Button variant="primary" type="submit">
-          Save
-        </Button>{" "}
-        <Button
-          onClick={() => {
-            navigate("/sip-profiles/index");
-          }}
-          variant="danger"
-          type="button"
-        >
-          Back
-        </Button>
-      </Form>
-    </div>
+    <Container>
+      <div>
+        <Form onSubmit={submit}>
+          <Tabs
+            id="controlled-tab"
+            activeKey={key}
+            onSelect={(k: any) => setKey(k)}
+            className="mb-3"
+          >
+            <Tab eventKey="endpoint" title="Endpoint">
+              {params.endpoint.map((v, i) => {
+                return draw("endpoint", v, i);
+              })}
+            </Tab>
+            <Tab eventKey="auth" title="Auth">
+              {params.auth.map((v, i) => {
+                return draw("auth", v, i);
+              })}
+            </Tab>
+            <Tab eventKey="transport" title="Transport">
+              {params.transport.map((v, i) => {
+                return draw("transport", v, i);
+              })}
+            </Tab>
+            <Tab eventKey="contact" title="Contact">
+              {params.contact.map((v, i) => {
+                return draw("contact", v, i);
+              })}
+            </Tab>
+            <Tab eventKey="aor" title="AOR">
+              {params.aor.map((v, i) => {
+                return draw("aor", v, i);
+              })}
+            </Tab>
+          </Tabs>
+          <Button variant="primary" type="submit">
+            Save
+          </Button>{" "}
+          <Button
+            onClick={() => {
+              navigate("/sip-profiles/index");
+            }}
+            variant="danger"
+            type="button"
+          >
+            Back
+          </Button>
+        </Form>
+      </div>
+    </Container>
   );
 };
 

@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -97,24 +97,26 @@ const SipGroupUsers = () => {
     ];
     return (
         <div style={{ width: '100%', height: '100%' }} >
-            <Row>
-                <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                    {modaltype}
-                </ModalCustom>
-                <Col>
-                    <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
-                        navigate("/sip-group-users/create");
-                    }}>Add Sip Group <PlusLg size={18} /></Button>
-                </Col>
-            </Row>
-            <br />
-            <DataGrid
-                paging={true}
-                dnd={false}
-                style={gridStyle}
-                columnDefs={columns}
-                rowData={rowData}
-            />
+            <Container>
+                <Row>
+                    <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                        {modaltype}
+                    </ModalCustom>
+                    <Col>
+                        <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
+                            navigate("/sip-group-users/create");
+                        }}>Add Sip Group <PlusLg size={18} /></Button>
+                    </Col>
+                </Row>
+                <br />
+                <DataGrid
+                    paging={true}
+                    dnd={false}
+                    style={gridStyle}
+                    columnDefs={columns}
+                    rowData={rowData}
+                />
+            </Container>
         </div>
     )
 }

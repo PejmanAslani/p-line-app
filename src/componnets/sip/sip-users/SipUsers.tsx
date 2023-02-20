@@ -1,18 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DataGrid from '../../grid-view/DataGrid/DataGrid'
 import {
-    Check,
     CheckLg,
     PencilSquare,
     PlusLg,
     Trash,
     Trash3Fill,
-    X,
     XLg
 } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
-import { Col, Dropdown, Row } from 'react-bootstrap';
+import { Col, Container, Dropdown, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import AddGroupUsersForm from '../add-group-users/AddGroupUsersForm';
 import BulkDeleteUsers from './bulk-user-delete/BulkDeleteUsers';
@@ -101,62 +99,66 @@ const SipUsers = () => {
 
     ];
     return (
+
         <div style={{ width: '100%', height: '100%' }} >
-            <Row>
-                <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                    {modaltype}
-                </ModalCustom>
-                <Col>
-                    <Dropdown>
-                        <Dropdown.Toggle style={{ background: "#1B9CFC", border: "none" }} id="dropdown-basic">
-                            Add Users
-                            &nbsp;
-                            <PlusLg size={17} />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navigate("/sip-users/create");
-                                }}
-                            ><PlusLg size={15} />New User </Dropdown.Item>
+            <Container>
+                <Row>
+                    <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                        {modaltype}
+                    </ModalCustom>
+                    <Col>
+                        <Dropdown>
+                            <Dropdown.Toggle style={{ background: "#1B9CFC", border: "none" }} id="dropdown-basic">
+                                Add Users
+                                &nbsp;
+                                <PlusLg size={17} />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    onClick={() => {
+                                        navigate("/sip-users/create");
+                                    }}
+                                ><PlusLg size={15} />New User </Dropdown.Item>
 
-                            <Dropdown.Item
-                                onClick={() => {
-                                    setSizeModal("lg");
-                                    setModalIsOpen(true);
-                                    setmodalType(<AddGroupUsersForm modal={setModalIsOpen} reload={() => reload()} />)
-                                }}
-                            ><PlusLg size={15} />Bulk Addition</Dropdown.Item>
+                                <Dropdown.Item
+                                    onClick={() => {
+                                        setSizeModal("lg");
+                                        setModalIsOpen(true);
+                                        setmodalType(<AddGroupUsersForm modal={setModalIsOpen} reload={() => reload()} />)
+                                    }}
+                                ><PlusLg size={15} />Bulk Addition</Dropdown.Item>
 
-                            <Dropdown.Item
-                                onClick={() => {
-                                    setSizeModal("lg");
-                                    setModalIsOpen(true);
-                                    setmodalType(<BulkDeleteUsers modal={setModalIsOpen} reload={() => { reload() }} />)
+                                <Dropdown.Item
+                                    onClick={() => {
+                                        setSizeModal("lg");
+                                        setModalIsOpen(true);
+                                        setmodalType(<BulkDeleteUsers modal={setModalIsOpen} reload={() => { reload() }} />)
 
-                                }}
-                            ><Trash size={15} />Bulk Delete</Dropdown.Item>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navigate("/sip-users-bulk-edit/index");
-                                }}
-                            ><PencilSquare size={15} />Bulk Edit</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Col>
-            </Row>
-            <br />
-            <DataGrid
-                flex={0}
-                gridRef
-                overlay={overlay}
-                dnd={false}
-                paging={true}
-                style={gridStyle}
-                columnDefs={columns}
-                rowData={rowData}
-            />
+                                    }}
+                                ><Trash size={15} />Bulk Delete</Dropdown.Item>
+                                <Dropdown.Item
+                                    onClick={() => {
+                                        navigate("/sip-users-bulk-edit/index");
+                                    }}
+                                ><PencilSquare size={15} />Bulk Edit</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                </Row>
+                <br />
+                <DataGrid
+                    flex={0}
+                    gridRef
+                    overlay={overlay}
+                    dnd={false}
+                    paging={true}
+                    style={gridStyle}
+                    columnDefs={columns}
+                    rowData={rowData}
+                />
+            </Container>
         </div >
+
     )
 }
 

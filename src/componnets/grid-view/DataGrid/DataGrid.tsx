@@ -5,6 +5,8 @@ import './style.css';
 import { AgGridReact } from 'ag-grid-react';
 import './Overlay.css'
 import Overlay from './Overlay';
+import { Container } from 'react-bootstrap';
+
 
 
 
@@ -34,7 +36,7 @@ const DataGrid = (props: any) => {
     const icons = useMemo(() => {
         return {
             // use font awesome for menu icons
-           // menu: '<i class="fa fa-bath" style="width: 10px"/>',
+            // menu: '<i class="fa fa-bath" style="width: 10px"/>',
             // filter: '<i class="fa fa-long-arrow-alt-down"/>',
             // columns: '<i class="fa fa-handshake"/>',
             // sortAscending: '<i class="fa fa-long-arrow-alt-down"/>',
@@ -60,22 +62,24 @@ const DataGrid = (props: any) => {
         };
     }, []);
     return (
-        <div className="ag-theme-alpine" style={props.style}>
-            <AgGridReact
-                ref={gridRef}
-                icons={icons}
-                gridOptions={gridOptions}
-                onGridReady={hideLoading}
-                onRowDragEnd={props.dragSort}
-                rowData={props.rowData}
-                defaultColDef={defaultColDef}
-                loadingOverlayComponent={loadingOverlayComponent}
-                rowDragManaged={props.dnd}
-                pagination={props.paging}
-                paginationPageSize={props.pageSize}
-                columnDefs={props.columnDefs}>
-            </AgGridReact>
-        </div>
+     
+            <div className="ag-theme-alpine" style={props.style}>
+                <AgGridReact
+                    ref={gridRef}
+                    icons={icons}
+                    gridOptions={gridOptions}
+                    onGridReady={hideLoading}
+                    onRowDragEnd={props.dragSort}
+                    rowData={props.rowData}
+                    defaultColDef={defaultColDef}
+                    loadingOverlayComponent={loadingOverlayComponent}
+                    rowDragManaged={props.dnd}
+                    pagination={props.paging}
+                    paginationPageSize={props.pageSize}
+                    columnDefs={props.columnDefs}>
+                </AgGridReact>
+            </div>
+       
     )
 }
 DataGrid.defaultProps = {

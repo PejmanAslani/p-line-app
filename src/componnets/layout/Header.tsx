@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Container, Navbar, Nav, NavDropdown, Col } from "react-bootstrap";
-import { PersonCircle } from "react-bootstrap-icons";
+import { Container, Navbar, Nav, NavDropdown, Col, Button } from "react-bootstrap";
+import { ArrowBarLeft, ArrowRight, List, ListTask, PersonCircle } from "react-bootstrap-icons";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import PlineTools, { TypeMessage } from "../services/PlineTools";
 import "./Header.css";
 import SideBar from "./SideBar";
+
 
 interface IHeaderProps {
   LogoutAction: Function;
@@ -13,13 +14,15 @@ interface IHeaderProps {
 
 const Header = (props: IHeaderProps) => {
   const navigate = useNavigate()
-  const [menu, setMenu] = useState([null]);
   const navDropdownTitle = (
     <>
       <PersonCircle />
     </>
   );
-
+  const [visable, setVisable] = useState(false)
+  const ToggleSidebar = () => {
+    visable === true ? setVisable(false) : setVisable(true);
+  }
   const apply = () => {
     if (window.confirm("Are you sure you want to apply the changes?")) {
       PlineTools.postRequest("/configs/apply", {
@@ -39,14 +42,17 @@ const Header = (props: IHeaderProps) => {
 
   return (
     <div className='main-container d-flex'>
-      <SideBar />
+      <SideBar visable={visable} toggle={ToggleSidebar} />
       <div className='content'>
         <Navbar className="text-white" expand="lg" style={{ backgroundColor: "#3B3B98 ", boxShadow: "2px 2px #C4C4C5" }} variant="dark">
+
           <Container fluid>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
+
+            {!visable && <List color="#fff" onClick={ToggleSidebar} size={25} />}
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <NavDropdown title="SIP" id="basic-nav-dropdown" >
+                <NavDropdown className="nav-menu" title="SIP" id="basic-nav-dropdown" >
                   <NavDropdown title="Sip Settings" id="basic-nav-dropdown" drop="end">
                     <NavDropdown.Item as={Link} to="/settings/sip-globals">
                       Global SIP Settings

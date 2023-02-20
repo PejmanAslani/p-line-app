@@ -29,6 +29,7 @@ export interface IAppRouteNode {
 }
 
 export const AppRoutes = [
+
   { path: "/settings/sip-globals", element: <SipGlobals /> },
   { path: "/settings/system-sip-settings", element: <SystemSipSettings /> },
   { path: "/sip-profiles/index", element: <SipProfiles /> },
@@ -62,4 +63,5 @@ export const AppRoutes = [
   { path: "/change-password/index", element: <ChangePassword /> },
   { path: "/call-reports/index", element: <Reports /> },
   { path: "/online-view/index", element: <OnlineView /> },
+
 ];

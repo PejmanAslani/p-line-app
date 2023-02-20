@@ -4,7 +4,7 @@ import SipTrunkForm from "./SipTrunkForm";
 import { CheckLg, Gear, PencilFill, PencilSquare, PlusLg, Trash3Fill, XLg } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import ModalCustom from "../../reuseables/modal/ModalCustom";
-import { Button, Col, Dropdown, Row } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 const SipTrunks = () => {
@@ -99,21 +99,23 @@ const SipTrunks = () => {
   ];
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Row>
-        <Col>
-          <Button style={{ background: "#1B9CFC", border: "none" }} onClick={() => {
-            navigate("/sip-trunks/create");
-          }}>Add Trunk <PlusLg size={18} /></Button>
-        </Col>
-      </Row>
-      <br />
-      <DataGrid
-        dnd={false}
-        paging={true}
-        style={gridStyle}
-        columnDefs={columns}
-        rowData={rowData}
-      />
+      <Container>
+        <Row>
+          <Col>
+            <Button style={{ background: "#1B9CFC", border: "none" }} onClick={() => {
+              navigate("/sip-trunks/create");
+            }}>Add Trunk <PlusLg size={18} /></Button>
+          </Col>
+        </Row>
+        <br />
+        <DataGrid
+          dnd={false}
+          paging={true}
+          style={gridStyle}
+          columnDefs={columns}
+          rowData={rowData}
+        />
+      </Container>
     </div>
   );
 };
