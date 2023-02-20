@@ -21,7 +21,7 @@ const AddGroupUsersForm = (props: any) => {
             console.log("error")
             return;
         }
-        let url = "/add-group-sip-users";
+        let url = "/sip-users/add-group-sip-users";
         PlineTools.postRequest(url, state)
             .then((result) => {
                 if (result.data.hasError) {

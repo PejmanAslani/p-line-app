@@ -43,6 +43,7 @@ const SipUsers = () => {
         PlineTools.getRequest(
             `/sip-users/?page=${page}&size=${size}`)
             .then((data) => {
+                console.log(data.data)
                 setRowData(data.data.content);
             })
             .catch((error) => {
