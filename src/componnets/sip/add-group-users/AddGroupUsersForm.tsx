@@ -8,25 +8,26 @@ import { useNavigate, useParams } from 'react-router'
 const AddGroupUsersForm = (props: any) => {
     const params = useParams();
     const [state, setState] = useState({
-        id: null,
         range: "",
         passwordType: "",
         sipGroup: 0,
         sipProfile: 0,
     });
     const saveData = (e: any) => {
+
         e.preventDefault();
         if (state.sipProfile === 0) {
             PlineTools.showAlert(["SIP Profile not selected."], TypeAlert.Danger);
+            console.log("error")
             return;
         }
         let url = "/add-group-sip-users";
         PlineTools.postRequest(url, state)
             .then((result) => {
                 if (result.data.hasError) {
+                    console.log(state)
                     PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                 } else {
-
                     props.modal(false);
                     props.reload();
                 }
@@ -38,11 +39,14 @@ const AddGroupUsersForm = (props: any) => {
     };
 
     const navigate = useNavigate();
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState({
+        sipGroups: [],
+        profiles: []
+    });
     const load = () => {
         PlineTools.getRequest("/sip-users/get-profiles-group")
             .then((result) => {
-                setOptions(result.data.sipGroups);
+                setOptions({ ...options, sipGroups: result.data.sipGroups, profiles: result.data.profiles });
             })
             .catch((error) => {
                 PlineTools.errorDialogMessage("Failed To Get Profiles");
@@ -54,7 +58,6 @@ const AddGroupUsersForm = (props: any) => {
                     PlineTools.getRequest(url)
                         .then((result) => {
                             setState(result.data);
-
                         })
                         .catch(() => {
                             PlineTools.errorDialogMessage("Getting Data failed");
@@ -86,6 +89,7 @@ const AddGroupUsersForm = (props: any) => {
                                     <Form.Label>Register Mode</Form.Label>
                                     <ToolTipCustom />
                                     <select
+
                                         value={state.passwordType}
                                         onChange={(e) =>
                                             setState({ ...state, passwordType: e.target.value })
@@ -109,7 +113,7 @@ const AddGroupUsersForm = (props: any) => {
                                             setState({ ...state, sipGroup: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
-                                        {options.map((opt: any) => (
+                                        {options.sipGroups.map((opt: any) => (
                                             <option key={opt.id} value={opt.id}>
                                                 {opt.name}
                                             </option>
@@ -127,7 +131,7 @@ const AddGroupUsersForm = (props: any) => {
                                             setState({ ...state, sipProfile: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
-                                        {options.map((opt: any) => (
+                                        {options.profiles.map((opt: any) => (
                                             <option key={opt.id} value={opt.id}>
                                                 {opt.name}
                                             </option>
