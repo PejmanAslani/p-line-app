@@ -54,8 +54,8 @@ const SipTrunks = () => {
   const actions = (params: any) => {
     let id = params.node.data.id;
     return (<>
-      <PencilSquare color="green" size={17} onClick={() => { navigate("/sip-trunks/edit/" + id) }} />
-      <Trash3Fill style={{ paddingLeft: "8px" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
+      <PencilSquare style={{ cursor: "pointer" }} color="green" size={17} onClick={() => { navigate("/sip-trunks/edit/" + id) }} />
+      <Trash3Fill style={{ paddingLeft: "8px", cursor: "pointer" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
     </>
     );
   }
@@ -108,6 +108,7 @@ const SipTrunks = () => {
           </Col>
         </Row>
         <br />
+        <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>Sip Trunks</h4>
         <DataGrid
           dnd={false}
           paging={true}

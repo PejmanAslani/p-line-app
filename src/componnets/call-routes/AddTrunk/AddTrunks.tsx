@@ -164,11 +164,15 @@ const AddTrunks = (props: any) => {
         </Row>
 
         <Row>
-          <div className="col-md-2">
-            <Button variant="success" style={{ marginTop: "30px", width: "100%" }} type="submit">
+          <Col md={6}>
+            <Button variant="success" type="submit">
               Add Trunk
             </Button>
-          </div>
+            {" "}
+            <Button variant="danger" onClick={() => { props.modal(false) }}>
+              Cancel
+            </Button>
+          </Col>
         </Row>
       </Form>
       <hr />

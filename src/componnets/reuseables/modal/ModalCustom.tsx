@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ModalBody, ModalFooter, ModalHeader, ModalTitle } from 'react-bootstrap';
+import { ModalBody, ModalFooter, ModalHeader, ModalTitle } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 const ModalCustom = (props: any) => {
   return (
@@ -12,7 +12,7 @@ const ModalCustom = (props: any) => {
         </ModalHeader>
         <ModalBody>{props.children}</ModalBody>
         <ModalFooter>
-          
+
         </ModalFooter>
       </Modal>
     </>

@@ -167,18 +167,21 @@ body {
   transition: all .1s ease;
 }
 
-.login-warpper{
+.login-warpper {
   max-width: 400px;
 
 }
-.captcha-btn{
+
+.captcha-btn {
   color: black;
   border: none;
   background: none;
 }
-.submitLogin{
+
+.submitLogin {
   padding-top: 10px;
 }
-.information{
+
+.information {
   margin-left: 10px;
 }

@@ -5,10 +5,10 @@ import PlineTools, {TypeMessage} from "../services/PlineTools";
 import React, {useCallback, useRef, useState} from 'react';
 import Captcha from 'react-captcha-code';
 import CheckboxCustom from "../reuseables/CheckboxCustom";
-import {Button, Col, Row} from "react-bootstrap";
-import {canvasRefProps} from "react-captcha-code/build/types/captcha";
+import { Col, Row} from "react-bootstrap";
 
-import {ArrowRepeat, Bookmark, Gear, Info, QuestionDiamond} from "react-bootstrap-icons";
+
+import {ArrowRepeat,} from "react-bootstrap-icons";
 
 interface LoginProps {
     LoginAction: Function;
@@ -86,7 +86,7 @@ function Login(props: LoginProps) {
                                     <br/>
                                     <Row>
                                         <Col md={10}>
-                                            <Captcha ref={captchaRef} height={60} bgColor="#DAD7E9" width={250}
+                                            <Captcha className="captcha" ref={captchaRef} height={60} bgColor="#DAD7E9" width={250}
                                                      fontSize={30} charNum={4}
                                                      onChange={handleChange}/>
                                         </Col>

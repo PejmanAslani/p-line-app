@@ -14,7 +14,7 @@ import {
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import GlobalOutboundsForm from './SpecificOutboundsForm';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
-import { Button, Col, Dropdown, Row } from 'react-bootstrap';
+import { Button, Col, Container, Dropdown, Row } from 'react-bootstrap';
 import AddPattern from '../AddPattern/AddPattern';
 import AddTrunks from '../AddTrunk/AddTrunks';
 import AddUser from '../AddUser/AddUser';
@@ -149,28 +149,31 @@ const SpecificOutbounds = () => {
 
     ];
     return (
-        <div style={{ width: '100%', height: '100%' }} >
-            <Row>
-                <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                    {modaltype}
-                </ModalCustom>
-                <Col>
-                    <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
-                        setSizeModal("lg");
-                        setModalIsOpen(true);
-                        setmodalType(<SpecificOutboundsForm modal={setModalIsOpen} reload={() => reload()} />)
-                    }}
-                    >New Route <PlusLg size={18} /></Button>
-                </Col>
-            </Row>
-            <br />
-            <DataGrid
-                style={gridStyle}
-                dragSort={dragSort}
-                columnDefs={columns}
-                rowData={rowData}
-            />
-        </div>
+        <Container>
+            <div style={{ width: '100%', height: '100%' }} >
+                <Row>
+                    <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                        {modaltype}
+                    </ModalCustom>
+                    <Col>
+                        <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
+                            setSizeModal("lg");
+                            setModalIsOpen(true);
+                            setmodalType(<SpecificOutboundsForm modal={setModalIsOpen} reload={() => reload()} />)
+                        }}
+                        >New Route <PlusLg size={18} /></Button>
+                    </Col>
+                </Row>
+                <br />
+                <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>Specific OutBound Routes</h4>
+                <DataGrid
+                    style={gridStyle}
+                    dragSort={dragSort}
+                    columnDefs={columns}
+                    rowData={rowData}
+                />
+            </div>
+        </Container>
     )
 }
 

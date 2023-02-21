@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DataGrid from '../../grid-view/DataGrid/DataGrid'
-import { BuildingGear, Diagram2, PencilFill, PencilSquare, PlusLg, Trash3Fill } from 'react-bootstrap-icons';
+import { BuildingGear, Diagram2, PencilSquare, PlusLg, Trash3Fill } from 'react-bootstrap-icons';
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import AddPattern from '../AddPattern/AddPattern';
 import AddTrunks from '../AddTrunk/AddTrunks';
 import { useNavigate } from 'react-router';
+import InboundsForm from './InboundsForm';
+import AddActions from '../AddActions/AddActions';
 
 const Inbounds = () => {
     const gridStyle = useMemo(() => ({ height: 500, width: '100%' }), []);
@@ -67,10 +69,20 @@ const Inbounds = () => {
 
             setSizeModal("lg");
             setModalIsOpen(true);
-           // setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
+            // setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
         }}> <PencilSquare color="green" size={17} /></p>
     }
-
+    const Actions = (params: any) => {
+        return <p
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+                setSizeModal("lg");
+                setModalIsOpen(true);
+                setmodalType(<AddActions />)
+            }}
+        >
+        </p>
+    }
     const Pattern = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
 
@@ -119,38 +131,39 @@ const Inbounds = () => {
             field: 'enable', headerName: 'Enable', width: 100, cellRenderer: CheckBox,
         },
         { field: 'pattern', headerName: 'Pattern', cellRenderer: Pattern, filter: false, sortable: false },
+        { field: 'actions', headerName: 'Actions', cellRenderer: Actions, filter: false, sortable: false },
         { field: 'trunk', headerName: 'Trunk', cellRenderer: Trunk, filter: false, sortable: false },
         { field: 'edit', headerName: 'Edit', cellRenderer: Edit, filter: false, sortable: false },
         { field: 'delete', headerName: 'Delete', cellRenderer: DeleteRow, filter: false, sortable: false },
 
     ];
     return (
-        <div style={{ width: '100%', height: '100%' }} >
+        <Container>
+            <div style={{ width: '100%', height: '100%' }} >
+                <Row>
+                    <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                        {modaltype}
+                    </ModalCustom>
+                    <Col>
+                        <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
+                            setSizeModal("lg");
+                            setModalIsOpen(true);
+                            setmodalType(<InboundsForm modal={setModalIsOpen} reload={() => reload()} />)
+                        }}
+                        >New Route <PlusLg size={18} /></Button>
+                    </Col>
+                </Row>
+                <br />
+                <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>InBound Routes</h4>
+                <DataGrid
+                    style={gridStyle}
+                    dragSort={dragSort}
+                    columnDefs={columns}
+                    rowData={rowData}
+                />
 
-
-            <Row>
-                <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                    {modaltype}
-                </ModalCustom>
-                <Col>
-                    <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
-                        setSizeModal("lg");
-                        setModalIsOpen(true);
-                        //setmodalType(<GlobalOutboundsForm modal={setModalIsOpen} reload={() => reload()} />)
-                    }}
-                    >New Route <PlusLg size={18} /></Button>
-                </Col>
-            </Row>
-            <br />
-
-            <DataGrid
-                style={gridStyle}
-                dragSort={dragSort}
-                columnDefs={columns}
-                rowData={rowData}
-            />
-
-        </div>
+            </div>
+        </Container>
     )
 }
 

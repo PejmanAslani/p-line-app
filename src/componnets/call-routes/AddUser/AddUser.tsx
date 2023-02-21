@@ -211,9 +211,13 @@ const AddUser = (props: any) => {
                     </Col> */}
         </Row>
         <Row>
-          <Col md={3}>
+          <Col md={6}>
             <Button variant="success" type="submit">
               Add User
+            </Button>
+            {" "}
+            <Button variant="danger" onClick={() => { props.modal(false) }}>
+              Cancel
             </Button>
           </Col>
         </Row>
@@ -227,6 +231,7 @@ const AddUser = (props: any) => {
         columnDefs={columns}
         rowData={rowData}
       />
+
     </div>
   );
 };

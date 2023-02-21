@@ -22,6 +22,7 @@ import BulkDeleteUsers from "../sip/sip-users/bulk-user-delete/BulkDeleteUsers";
 import BulkEditUsers from "../sip/sip-users/bulk-user-edit/BulkEditUsers";
 import Reports from "../reports/Reports";
 import OnlineView from "../online-view/OnlineView";
+import AddActions from "../call-routes/AddActions/AddActions";
 
 export interface IAppRouteNode {
   path: string;
@@ -63,5 +64,5 @@ export const AppRoutes = [
   { path: "/change-password/index", element: <ChangePassword /> },
   { path: "/call-reports/index", element: <Reports /> },
   { path: "/online-view/index", element: <OnlineView /> },
-
+  { path: "/test", element: <AddActions /> },
 ];

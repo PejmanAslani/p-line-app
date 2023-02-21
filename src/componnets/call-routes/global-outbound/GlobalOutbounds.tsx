@@ -4,7 +4,7 @@ import { BuildingGear, Diagram2, PencilFill, PencilSquare, PlusLg, Trash3Fill } 
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import GlobalOutboundsForm from './GlobalOutboundsForm';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import AddPattern from '../AddPattern/AddPattern';
 import AddTrunks from '../AddTrunk/AddTrunks';
 import { useNavigate } from 'react-router';
@@ -74,7 +74,7 @@ const GlobalOutbounds = () => {
 
     const Pattern = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-  
+
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddPattern urlPattern="/outbound-route-patterns/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -82,7 +82,7 @@ const GlobalOutbounds = () => {
     }
     const Trunk = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
- 
+
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddTrunks urlTrunk="/outbound-route-trunks/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -126,32 +126,32 @@ const GlobalOutbounds = () => {
 
     ];
     return (
-        <div style={{ width: '100%', height: '100%' }} >
+        <Container>
+            <div style={{ width: '100%', height: '100%' }} >
+                <Row>
+                    <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                        {modaltype}
+                    </ModalCustom>
+                    <Col>
+                        <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
+                            setSizeModal("lg");
+                            setModalIsOpen(true);
+                            setmodalType(<GlobalOutboundsForm modal={setModalIsOpen} reload={() => reload()} />)
+                        }}
+                        >New Route <PlusLg size={18} /></Button>
+                    </Col>
+                </Row>
+                <br />
+                <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>Global OutBound Routes</h4>
+                <DataGrid
+                    style={gridStyle}
+                    dragSort={dragSort}
+                    columnDefs={columns}
+                    rowData={rowData}
+                />
 
-
-            <Row>
-                <ModalCustom size={sizeModal} show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                    {modaltype}
-                </ModalCustom>
-                <Col>
-                    <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
-                        setSizeModal("lg");
-                        setModalIsOpen(true);
-                        setmodalType(<GlobalOutboundsForm modal={setModalIsOpen} reload={() => reload()} />)
-                    }}
-                    >New Route <PlusLg size={18} /></Button>
-                </Col>
-            </Row>
-            <br />
-
-            <DataGrid
-                style={gridStyle}
-                dragSort={dragSort}
-                columnDefs={columns}
-                rowData={rowData}
-            />
-
-        </div>
+            </div>
+        </Container >
     )
 }
 

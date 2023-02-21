@@ -7,13 +7,12 @@ import TextareaCustom from '../../reuseables/TextareaCustom';
 
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 
-const GlobalOutboundsForm = (props: any) => {
+const InboundsForm = (props: any) => {
   const [state, setState] = useState({
     id: null,
-    name: '',
-    sequential: 0,
-    enable: false,
-    description: ''
+    name: "",
+    description: "",
+    enable: ""
   });
 
 
@@ -71,7 +70,7 @@ const GlobalOutboundsForm = (props: any) => {
   return (
     <Row>
       <Col md={{ span: 8, offset: 2 }}>
-        <h5>Global Outbound Route</h5>
+        <h5>Iutbound Route</h5>
         <hr />
         <Form onSubmit={saveData}>
           <Row>
@@ -103,6 +102,14 @@ const GlobalOutboundsForm = (props: any) => {
               <Button variant="primary" type="submit">
                 Save
               </Button>{" "}
+              <Button
+                variant="danger"
+                onClick={() => {
+                  props.modal(false);
+                }}
+              >
+                Exit
+              </Button>
             </Col>
           </Row>
         </Form>
@@ -111,9 +118,9 @@ const GlobalOutboundsForm = (props: any) => {
   )
 }
 
-export default GlobalOutboundsForm
+export default InboundsForm
 
 
-GlobalOutboundsForm.defaultProps = {
+InboundsForm.defaultProps = {
   id: null
 }
