@@ -40,10 +40,10 @@ const SipUsers = () => {
     }
     const getData = (page = 0, size = 99999) => {
         setOverlay(true);
-
         PlineTools.getRequest(
             `/sip-users/?page=${page}&size=${size}`)
             .then((data) => {
+                console.log(data.data)
                 setRowData(data.data.content);
             })
             .catch((error) => {
@@ -149,7 +149,6 @@ const SipUsers = () => {
                 <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>Sip Users</h4>
                 <DataGrid
                     flex={0}
-                    overlay={overlay}
                     dnd={false}
                     paging={true}
                     style={gridStyle}

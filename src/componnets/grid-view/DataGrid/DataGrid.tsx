@@ -5,10 +5,6 @@ import './style.css';
 import { AgGridReact } from 'ag-grid-react';
 import './Overlay.css'
 import Overlay from './Overlay';
-import { Container } from 'react-bootstrap';
-
-
-
 
 const DataGrid = (props: any) => {
     

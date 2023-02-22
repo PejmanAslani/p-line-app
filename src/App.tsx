@@ -8,9 +8,10 @@ import Home from "./componnets/home/Home";
 import Login from "./componnets/login/Login";
 import NotFound from "./componnets/errors/NotFound";
 import Footer from "./componnets/layout/Footer";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Button, Container, Modal } from "react-bootstrap";
 import { BugFill, CheckCircleFill, ExclamationCircleFill, InfoCircleFill } from "react-bootstrap-icons";
 import 'react-loading-skeleton/dist/skeleton.css'
+
 
 
 interface ILoginObject {
@@ -27,7 +28,7 @@ interface ILoginObject {
 const App = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<boolean>(false);
-  const [show, setShow] = useState(true);
+
   const [dialog, setDialog] = useState({
     isShow: false,
     message: "",
@@ -127,6 +128,25 @@ const App = () => {
 
   return (
     <div>
+      <Modal
+        show={dialog.isShow}
+        centered
+        onHide={() => { setDialog({ ...dialog, isShow: false }); }}
+        backdrop={dialog.backdrop}
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{dialog.icon} {dialog.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{dialog.message}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => {
+            setDialog({ ...dialog, isShow: false });
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Routes>
         <Route element={<PrivateRoute LogoutAction={logout} AlertView={alert.isShow &&
           <Container>
