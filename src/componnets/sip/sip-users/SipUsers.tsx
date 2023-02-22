@@ -40,10 +40,10 @@ const SipUsers = () => {
     }
     const getData = (page = 0, size = 99999) => {
         setOverlay(true);
+
         PlineTools.getRequest(
             `/sip-users/?page=${page}&size=${size}`)
             .then((data) => {
-                console.log(data.data)
                 setRowData(data.data.content);
             })
             .catch((error) => {
@@ -90,7 +90,6 @@ const SipUsers = () => {
     const columns = [
         { field: 'row', valueGetter: "node.rowIndex + 1", headerName: 'Row', width: "150" },
         { field: 'uid', headerName: 'User', },
-
         { field: 'sipProfile.name', headerName: 'Sip Profile', width: "250" },
         { field: 'sipUserGroup.name', headerName: 'Sip Group', width: "300" },
         {
@@ -150,7 +149,6 @@ const SipUsers = () => {
                 <h4 style={{ fontFamily: "monospace", fontWeight: "400" }}>Sip Users</h4>
                 <DataGrid
                     flex={0}
-                    gridRef
                     overlay={overlay}
                     dnd={false}
                     paging={true}

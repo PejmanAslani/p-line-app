@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import TextInputCustom from "../../../reuseables/TextInputCustom";
 import ToolTipCustom from "../../../reuseables/tooltip/ToolTipCustom";
-import PlineTools from "../../../services/PlineTools";
+import PlineTools, { TypeAlert } from "../../../services/PlineTools";
 
 const BulkEditUsers = (props: any) => {
 
   const params = useParams();
   const [state, setState] = useState({
-    id: null,
     usersRange: "",
     password: "",
     upPassword: false,
@@ -42,16 +40,25 @@ const BulkEditUsers = (props: any) => {
   const saveData = (e: any) => {
     e.preventDefault();
 
+    let url = "/sip-users/bulk-edit-sip-users";
+    PlineTools.postRequest(url, state)
+      .then((result) => {
+        if (result.data.hasError) {
+          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+        } else {
+          navigate("/sip-users/index");
+        }
+      })
+      .catch((error) => {
+        PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
 
-  }
-
+      });
+  };
 
   const load = () => {
     PlineTools.getRequest("/sip-users/get-profiles-group")
       .then((result) => {
-
         setOptions({ ...options, profileOptions: result.data.profiles, sipGroupOptions: result.data.sipGroups });
-
       })
       .catch((error) => {
         if (error.response.status === 422) {
