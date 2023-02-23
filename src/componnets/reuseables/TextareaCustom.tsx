@@ -21,6 +21,7 @@ const TextareaCustom = (props: any) => {
                     maxLength={props.lenght}
                     defaultValue={props.value}
                     onChange={handleChange}
+                    
                 />
             </Form.Group>
         </Col>

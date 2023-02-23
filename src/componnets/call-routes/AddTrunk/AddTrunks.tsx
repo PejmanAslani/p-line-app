@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import TextInputCustom from '../../reuseables/TextInputCustom';
-import CheckboxCustom from '../../reuseables/CheckboxCustom';
-
 import { Button, Form, Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import ToolTipCustom from '../../reuseables/tooltip/ToolTipCustom';
@@ -162,7 +160,6 @@ const AddTrunks = (props: any) => {
             min={0}
           />
         </Row>
-
         <Row>
           <Col md={6}>
             <Button variant="success" type="submit">

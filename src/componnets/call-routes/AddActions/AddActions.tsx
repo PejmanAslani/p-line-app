@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import TextInputCustom from "../../reuseables/TextInputCustom";
-import { PlusLg, Trash3Fill } from "react-bootstrap-icons";
+import {  Trash3Fill } from "react-bootstrap-icons";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 
@@ -16,7 +16,7 @@ function AddActions(props: any) {
         },
         action: "",
         value: "",
-        option: ""
+        options: ""
 
     });
 
@@ -146,26 +146,25 @@ function AddActions(props: any) {
                     <Col>
                         <Row>
                             <TextInputCustom
-
                                 setState={setState}
-                                label="Prefix Num"
-                                name="prefixNum"
+                                label="Action"
+                                name="action"
                                 value={state.action}
                             />
-                            <TextInputCustom
 
+                            <TextInputCustom
                                 setState={setState}
-                                label="Pattern"
-                                name="pattern"
+                                label="Value"
+                                name="value"
                                 value={state.value}
                             />
                         </Row>
                         <Row>
                             <TextInputCustom
                                 setState={setState}
-                                label="Drop Number"
-                                name="dropNumber"
-                                value={state.option}
+                                label="Options"
+                                name="options"
+                                value={state.options}
                             />
                         </Row>
                     </Col>

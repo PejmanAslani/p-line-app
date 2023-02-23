@@ -3,9 +3,9 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import ToolTipCustom from "../../../reuseables/tooltip/ToolTipCustom";
 import PlineTools, { TypeAlert } from "../../../services/PlineTools";
-
-const BulkEditUsers = (props: any) => {
-
+import TextInputCustom from "../../../reuseables/TextInputCustom";
+import TextareaCustom from "../../../reuseables/TextareaCustom";
+const BulkEditUsers = () => {
   const params = useParams();
   const [state, setState] = useState({
     usersRange: "",
@@ -39,8 +39,10 @@ const BulkEditUsers = (props: any) => {
   });
   const saveData = (e: any) => {
     e.preventDefault();
+
     let url = "/sip-users/bulk-edit-sip-users";
     PlineTools.postRequest(url, state)
+
       .then((result) => {
         if (result.data.hasError) {
           PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
@@ -53,7 +55,6 @@ const BulkEditUsers = (props: any) => {
 
       });
   };
-
   const load = () => {
     PlineTools.getRequest("/sip-users/get-profiles-group")
       .then((result) => {
@@ -80,18 +81,15 @@ const BulkEditUsers = (props: any) => {
         }
       });
   };
-
   useEffect(() => {
     load();
   }, []);
-
   return (
     <Row>
       <Col md={{ span: 8, offset: 2 }}>
         <h5>Bulk Edit SIP Users</h5>
         <hr />
         <Form onSubmit={saveData}>
-
           <Row>
             <Col md={6}>
               <Form.Group
@@ -100,6 +98,7 @@ const BulkEditUsers = (props: any) => {
                 <Form.Label style={{ marginLeft: "6px" }}>Users Range</Form.Label>
                 <ToolTipCustom />
                 <Form.Control
+
                   name="usersRange"
                   required={true}
                   placeholder="Example 100-120,300-310,400-450"
@@ -214,7 +213,6 @@ const BulkEditUsers = (props: any) => {
             <Col md={6}>
               <Form.Group className="mb-3" controlId="sipProfiles">
                 <input onChange={(e) => { setState({ ...state, upSipUserGroup: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-
                 <Form.Label style={{ marginLeft: "6px" }}>SIP Profiles</Form.Label>
                 <ToolTipCustom />
                 <select
@@ -227,6 +225,7 @@ const BulkEditUsers = (props: any) => {
                   {options.profileOptions.map((opt: any) => (
                     <option key={opt.id} value={opt.id}>
                       {opt.name}
+
                     </option>
                   ))}
                 </select>
@@ -254,7 +253,6 @@ const BulkEditUsers = (props: any) => {
             <Col md={6}>
               <Form.Group className="mb-3" controlId="enable">
                 <input onChange={(e) => { setState({ ...state, upEnable: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-
                 <Form.Label style={{ marginLeft: "6px" }}>Enable</Form.Label>
                 <ToolTipCustom />
                 <select
@@ -275,7 +273,18 @@ const BulkEditUsers = (props: any) => {
               </Form.Group>
             </Col>
           </Row>
-
+          <Row>
+            <Col>
+              <TextareaCustom
+                name="test"
+                label="Test"
+                setState={setState}
+                md="8"
+              
+                rows={4}
+              />
+            </Col>
+          </Row>
           <Button variant="primary" type="submit">
             Save
           </Button>{" "}
@@ -288,6 +297,7 @@ const BulkEditUsers = (props: any) => {
           >
             Cancel
           </Button>
+
         </Form>
       </Col>
 
