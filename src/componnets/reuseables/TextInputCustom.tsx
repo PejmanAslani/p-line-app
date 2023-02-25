@@ -32,11 +32,14 @@ const TextInputCustom = (props: any) => {
             type={props.type}
             required={props.required}
             value={props.value}
-
+            isInvalid={!!props.error}
             onChange={handleChange}
             min={props.min}
             placeholder={props.placeholder}
           />
+          <Form.Control.Feedback type="invalid">
+            {props.error}
+          </Form.Control.Feedback>
         </Form.Group>
       }
     </Col>
@@ -49,6 +52,8 @@ TextInputCustom.defaultProps = {
   type: "text",
   min: null,
   md: 6,
-  Placeholder: ""
+  Placeholder: "",
+  error: "",
+
 }
 export default TextInputCustom

@@ -12,7 +12,7 @@ const BulkDeleteUsers = (props: any) => {
   const saveData = (e: any) => {
     e.preventDefault();
     if (window.confirm(`Are you sure of deleting sip users in the range ${state.range} ?`)) {
-      let url = "/sip-users/bulk-delete-sip-users";
+      let url = "/sip-users/delete-group-sip-users";
       PlineTools.postRequest(url, state)
         .then((result) => {
           if (result.data.hasError) {

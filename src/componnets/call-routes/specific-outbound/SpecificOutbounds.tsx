@@ -53,7 +53,6 @@ const SpecificOutbounds = () => {
         PlineTools.getRequest(
             `/outbound-routes/?page=${page}&size=${size}&${searchUrl}&${sort}`)
             .then((data) => {
-                console.log(data.data.content);
                 setRowData(data.data.content.filter(((privateRoute: any) => privateRoute.privateRoute === true)));
             })
             .catch((error) => {

@@ -14,7 +14,7 @@ const GlobalOutboundsForm = (props: any) => {
     id: null,
     name: "",
     sequential: 0,
-    enable: false,
+    enable: true,
     privateRoute: false,
     description: "",
   });
@@ -26,7 +26,7 @@ const GlobalOutboundsForm = (props: any) => {
       PlineTools.postRequest(url, state)
         .then((result: any) => {
           if (result.data.hasError) {
-            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+            PlineTools.errorDialogMessage(result.data.messages);
           } else {
             props.modal(false);
             props.reload();
@@ -79,14 +79,6 @@ const GlobalOutboundsForm = (props: any) => {
         <h5>Global Outbound Route</h5>
         <hr />
         <Form onSubmit={saveData}>
-          <Row>
-            <CheckboxCustom
-              name="enable"
-              label="Enable"
-              checked={state.enable}
-              setState={setState}
-            />
-          </Row>
           <Row>
             <TextInputCustom
               name="name"

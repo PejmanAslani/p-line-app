@@ -20,22 +20,22 @@ const BulkEditUsers = () => {
     outboundCallerIdName: "",
     upOutboundCallerIdName: false,
     sipProfile: {
-      id: 0
+      id: 0,
     },
     upSipProfile: false,
     sipUserGroup: {
-      id: 0
+      id: 0,
     },
     upSipUserGroup: false,
     acl: "",
     upAcl: false,
     enable: true,
-    upEnable: false
+    upEnable: false,
   });
   const navigate = useNavigate();
   const [options, setOptions] = useState({
     profileOptions: [],
-    sipGroupOptions: []
+    sipGroupOptions: [],
   });
   const saveData = (e: any) => {
     e.preventDefault();
@@ -51,14 +51,19 @@ const BulkEditUsers = () => {
         }
       })
       .catch((error) => {
-        PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+        PlineTools.errorDialogMessage(
+          "An error occurred while executing your request. Contact the system administrator"
+        );
       });
   };
   const load = () => {
     PlineTools.getRequest("/sip-users/get-profiles-group")
       .then((result) => {
-        setOptions({ ...options, profileOptions: result.data.profiles, sipGroupOptions: result.data.sipGroups });
+        setOptions({
+          ...options,
+          profileOptions: result.data.profiles,
+          sipGroupOptions: result.data.sipGroups,
+        });
       })
       .catch((error) => {
         if (error.response.status === 422) {
@@ -92,98 +97,159 @@ const BulkEditUsers = () => {
         <Form onSubmit={saveData}>
           <Row>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"usersRange"}>
-                <Form.Label style={{ marginLeft: "6px" }}>Users Range</Form.Label>
+              <Form.Group className="mb-3" controlId={"usersRange"}>
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  Users Range
+                </Form.Label>
                 <ToolTipCustom />
                 <Form.Control
-
                   name="usersRange"
                   required={true}
                   placeholder="Example 100-120,300-310,400-450"
-                  onChange={(e) => setState({
-                    ...state, usersRange: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      usersRange: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"password"}>
-                <input style={{ marginLeft: "6px" }} onChange={(e) => { setState({ ...state, upPassword: e.target.checked }) }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
+              <Form.Group className="mb-3" controlId={"password"}>
+                <input
+                  style={{ marginLeft: "6px" }}
+                  onChange={(e) => {
+                    setState({ ...state, upPassword: e.target.checked });
+                  }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
                 <Form.Label style={{ marginLeft: "6px" }}>Password</Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   name="password"
-                  onChange={(e) => setState({
-                    ...state, password: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      password: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
           </Row>
           <Row>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"callerIdNumber"}>
-                <input style={{ marginLeft: "6px" }} onChange={(e) => { setState({ ...state, upCallerIdNumber: e.target.checked }) }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <Form.Label style={{ marginLeft: "6px" }}>Caller ID Number</Form.Label>
+              <Form.Group className="mb-3" controlId={"callerIdNumber"}>
+                <input
+                  style={{ marginLeft: "6px" }}
+                  onChange={(e) => {
+                    setState({ ...state, upCallerIdNumber: e.target.checked });
+                  }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  Caller ID Number
+                </Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   name="callerIdNumber"
-                  onChange={(e) => setState({
-                    ...state, callerIdNumber: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      callerIdNumber: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"callerIdName"}>
-                <input style={{ marginLeft: "6px" }} onChange={(e) => { setState({ ...state, upCallerIdName: e.target.checked }) }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <Form.Label style={{ marginLeft: "6px" }}>Caller ID Name</Form.Label>
+              <Form.Group className="mb-3" controlId={"callerIdName"}>
+                <input
+                  style={{ marginLeft: "6px" }}
+                  onChange={(e) => {
+                    setState({ ...state, upCallerIdName: e.target.checked });
+                  }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  Caller ID Name
+                </Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   name="callerIdName"
-                  onChange={(e) => setState({
-                    ...state, callerIdName: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      callerIdName: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
           </Row>
           <Row>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"outboundCallerIdNumber"}>
-                <input onChange={(e) => { setState({ ...state, upOutboundCallerIdNumber: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <Form.Label style={{ marginLeft: "6px" }}>Outbound Caller ID Number</Form.Label>
+              <Form.Group className="mb-3" controlId={"outboundCallerIdNumber"}>
+                <input
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      upOutboundCallerIdNumber: e.target.checked,
+                    });
+                  }}
+                  style={{ marginLeft: "6px" }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  Outbound Caller ID Number
+                </Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   name="outBoundCallerIdNumber"
-                  onChange={(e) => setState({
-                    ...state, outboundCallerIdNumber: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      outboundCallerIdNumber: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"outboundCallerIdName"}>
-                <input onChange={(e) => { setState({ ...state, upOutboundCallerIdName: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <Form.Label style={{ marginLeft: "6px" }}>Outbound Caller ID Name</Form.Label>
+              <Form.Group className="mb-3" controlId={"outboundCallerIdName"}>
+                <input
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      upOutboundCallerIdName: e.target.checked,
+                    });
+                  }}
+                  style={{ marginLeft: "6px" }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  Outbound Caller ID Name
+                </Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   name="outboundCallerIdName"
-                  onChange={(e) => setState({
-                    ...state, outboundCallerIdName: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      outboundCallerIdName: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
@@ -191,16 +257,30 @@ const BulkEditUsers = () => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3" controlId="sipProfiles">
-                <input onChange={(e) => { setState({ ...state, upSipProfile: e.target.checked }) }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                <input
+                  onChange={(e) => {
+                    setState({ ...state, upSipProfile: e.target.checked });
+                  }}
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
 
-                <Form.Label style={{ marginLeft: "6px" }}>SIP User Groups</Form.Label>
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  SIP User Groups
+                </Form.Label>
                 <ToolTipCustom />
                 <select
                   className={"form-select"}
                   value={state.sipUserGroup.id}
                   onChange={(e) => {
-                    setState({ ...state, sipUserGroup: { id: parseInt(e.target.value) } });
-                  }}>
+                    setState({
+                      ...state,
+                      sipUserGroup: { id: parseInt(e.target.value) },
+                    });
+                  }}
+                >
                   <option value={0}>Select User Group ...</option>
                   {options.sipGroupOptions.map((opt: any) => (
                     <option key={opt.id} value={opt.id}>
@@ -212,20 +292,34 @@ const BulkEditUsers = () => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3" controlId="sipProfiles">
-                <input onChange={(e) => { setState({ ...state, upSipUserGroup: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <Form.Label style={{ marginLeft: "6px" }}>SIP Profiles</Form.Label>
+                <input
+                  onChange={(e) => {
+                    setState({ ...state, upSipUserGroup: e.target.checked });
+                  }}
+                  style={{ marginLeft: "6px" }}
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <Form.Label style={{ marginLeft: "6px" }}>
+                  SIP Profiles
+                </Form.Label>
                 <ToolTipCustom />
                 <select
                   className={"form-select"}
                   value={state.sipProfile.id}
                   onChange={(e) => {
-                    setState({ ...state, sipProfile: { id: parseInt(e.target.value) } })
-                  }}>
+                    setState({
+                      ...state,
+                      sipProfile: { id: parseInt(e.target.value) },
+                    });
+                  }}
+                >
                   <option value={0}>Select Profile ...</option>
                   {options.profileOptions.map((opt: any) => (
                     <option key={opt.id} value={opt.id}>
                       {opt.name}
-
                     </option>
                   ))}
                 </select>
@@ -234,25 +328,43 @@ const BulkEditUsers = () => {
           </Row>
           <Row>
             <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                controlId={"acl"}>
-                <input onChange={(e) => { setState({ ...state, upAcl: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
+              <Form.Group className="mb-3" controlId={"acl"}>
+                <input
+                  onChange={(e) => {
+                    setState({ ...state, upAcl: e.target.checked });
+                  }}
+                  style={{ marginLeft: "6px" }}
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                />
                 <Form.Label style={{ marginLeft: "6px" }}>Acl</Form.Label>
                 <ToolTipCustom />
                 <Form.Control
                   as={"textarea"}
                   rows={3}
                   name="acl"
-                  onChange={(e) => setState({
-                    ...state, acl: e.target.value
-                  })}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      acl: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3" controlId="enable">
-                <input onChange={(e) => { setState({ ...state, upEnable: e.target.checked }) }} style={{ marginLeft: "6px" }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                <input
+                  onChange={(e) => {
+                    setState({ ...state, upEnable: e.target.checked });
+                  }}
+                  style={{ marginLeft: "6px" }}
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
                 <Form.Label style={{ marginLeft: "6px" }}>Enable</Form.Label>
                 <ToolTipCustom />
                 <select
@@ -273,18 +385,6 @@ const BulkEditUsers = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <TextareaCustom
-                name="test"
-                label="Test"
-                setState={setState}
-                md="8"
-              
-                rows={4}
-              />
-            </Col>
-          </Row>
           <Button variant="primary" type="submit">
             Save
           </Button>{" "}
@@ -297,14 +397,9 @@ const BulkEditUsers = () => {
           >
             Cancel
           </Button>
-
         </Form>
       </Col>
-
-
     </Row>
-
-
   );
 };
 

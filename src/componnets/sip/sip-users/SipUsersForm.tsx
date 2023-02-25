@@ -5,10 +5,9 @@ import CheckboxCustom from "../../reuseables/CheckboxCustom";
 import TextareaCustom from "../../reuseables/TextareaCustom";
 import TextInputCustom from "../../reuseables/TextInputCustom";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
-import * as icons from 'react-bootstrap-icons';
+import * as icons from "react-bootstrap-icons";
 import ToolTipCustom from "../../reuseables/tooltip/ToolTipCustom";
 const SipUsersForm = (props: any) => {
-
   const params = useParams();
   const [state, setState] = useState({
     id: null,
@@ -21,17 +20,17 @@ const SipUsersForm = (props: any) => {
     outboundCallerIdNumber: "",
     outboundCallerIdName: "",
     sipProfile: {
-      id: 0
+      id: 0,
     },
     sipUserGroup: {
-      id: 0
+      id: 0,
     },
-    enable: true
+    enable: true,
   });
   const navigate = useNavigate();
   const [options, setOptions] = useState({
     profileOptions: [],
-    sipGroupOptions: []
+    sipGroupOptions: [],
   });
   const saveData = (e: any) => {
     e.preventDefault();
@@ -42,27 +41,30 @@ const SipUsersForm = (props: any) => {
           if (result.data.hasError) {
             PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
           } else {
-            navigate('/sip-users/index')
+            navigate("/sip-users/index");
           }
         })
         .catch((error: any) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
-
     } else {
-      PlineTools.patchRequest(url, state).then((result: any) => {
-        if (result.data.hasError) {
-          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-        } else {
-          navigate('/sip-users/index')
-        }
-      })
+      PlineTools.patchRequest(url, state)
+        .then((result: any) => {
+          if (result.data.hasError) {
+            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+          } else {
+            navigate("/sip-users/index");
+          }
+        })
         .catch((error: any) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
-
-  }
+  };
   const getData = () => {
     const id = params.id;
     if (id != undefined) {
@@ -71,7 +73,9 @@ const SipUsersForm = (props: any) => {
           setState(result.data);
         })
         .catch(() => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
   };
@@ -79,9 +83,11 @@ const SipUsersForm = (props: any) => {
   const load = () => {
     PlineTools.getRequest("/sip-users/get-profiles-group")
       .then((result) => {
-
-        setOptions({ ...options, profileOptions: result.data.profiles, sipGroupOptions: result.data.sipGroups });
-
+        setOptions({
+          ...options,
+          profileOptions: result.data.profiles,
+          sipGroupOptions: result.data.sipGroups,
+        });
       })
       .catch((error) => {
         if (error.response.status === 422) {
@@ -126,13 +132,23 @@ const SipUsersForm = (props: any) => {
           </Row>
           <Row>
             <TextInputCustom
-              name="callerIdName"
-              label="CallerId Name"
+              name="uid"
+              label="SIP User"
               type="text"
-              require={true}
-              value={state.callerIdName}
+              requir={true}
+              value={state.uid}
               setState={setState}
             />
+            <TextInputCustom
+              name="password"
+              label="Password"
+              type="text"
+              require={true}
+              value={state.password}
+              setState={setState}
+            />
+          </Row>
+          <Row>
             <TextInputCustom
               name="callerIdNumber"
               label="CallerId Number"
@@ -141,27 +157,34 @@ const SipUsersForm = (props: any) => {
               value={state.callerIdNumber}
               setState={setState}
             />
-          </Row>
-          <Row>
             <TextInputCustom
-              name="uid"
-              label="User ID"
-              type="text"
-              requir={true}
-              value={state.uid}
-              setState={setState}
-            />
-            <TextInputCustom
-              label="Parallel"
-              name="parallel"
+              name="callerIdName"
+              label="CallerId Name"
               type="text"
               require={true}
-              value={state.parallel}
+              value={state.callerIdName}
               setState={setState}
             />
           </Row>
           <Row>
-
+            <TextInputCustom
+              name="outboundCallerIdNumber"
+              label="Outbound CallerId Number"
+              type="text"
+              require={true}
+              value={state.outboundCallerIdNumber}
+              setState={setState}
+            />
+            <TextInputCustom
+              name="outboundCallerIdName"
+              label="Outbound CallerId Name"
+              type="text"
+              require={true}
+              value={state.outboundCallerIdName}
+              setState={setState}
+            />
+          </Row>
+          <Row>
             <Col md={6}>
               <Form.Group className="mb-3" controlId="sipProfiles">
                 <Form.Label>SIP User Groups</Form.Label>
@@ -170,8 +193,12 @@ const SipUsersForm = (props: any) => {
                   className={"form-select"}
                   value={state.sipUserGroup.id}
                   onChange={(e) => {
-                    setState({ ...state, sipUserGroup: { id: parseInt(e.target.value) } });
-                  }}>
+                    setState({
+                      ...state,
+                      sipUserGroup: { id: parseInt(e.target.value) },
+                    });
+                  }}
+                >
                   <option value={0}>Select User Group ...</option>
                   {options.sipGroupOptions.map((opt: any) => (
                     <option key={opt.id} value={opt.id}>
@@ -190,8 +217,12 @@ const SipUsersForm = (props: any) => {
                   className={"form-select"}
                   value={state.sipProfile.id}
                   onChange={(e) => {
-                    setState({ ...state, sipProfile: { id: parseInt(e.target.value) } })
-                  }}>
+                    setState({
+                      ...state,
+                      sipProfile: { id: parseInt(e.target.value) },
+                    });
+                  }}
+                >
                   <option value={0}>Select Profile ...</option>
                   {options.profileOptions.map((opt: any) => (
                     <option key={opt.id} value={opt.id}>
@@ -203,39 +234,18 @@ const SipUsersForm = (props: any) => {
             </Col>
           </Row>
           <Row>
-            <TextInputCustom
-              name="password"
-              label="Password"
-              type="text"
-              require={true}
-              value={state.password}
-              setState={setState}
-            />
-            <TextInputCustom
-              name="outboundCallerIdName"
-              label="Outbound CallerId Name"
-              type="text"
-              require={true}
-              value={state.outboundCallerIdName}
-              setState={setState}
-            />
-          </Row>
-          <Row>
-            <TextInputCustom
-              name="outboundCallerIdNumber"
-              label="Outbound CallerId Number"
-              type="text"
-              require={true}
-              value={state.outboundCallerIdNumber}
-              setState={setState}
-            />
-
-          </Row>
-          <Row>
             <TextareaCustom
               name="acl"
               label="Acl"
               value={state.acl}
+              setState={setState}
+            />
+            <TextInputCustom
+              label="Parallel"
+              name="parallel"
+              type="text"
+              require={true}
+              value={state.parallel}
               setState={setState}
             />
           </Row>
@@ -253,11 +263,7 @@ const SipUsersForm = (props: any) => {
           </Button>
         </Form>
       </Col>
-
-
     </Row>
-
-
   );
 };
 

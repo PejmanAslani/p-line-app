@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Col, Row } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
-import CheckboxCustom from '../../reuseables/CheckboxCustom';
-import TextInputCustom from '../../reuseables/TextInputCustom';
-import TextareaCustom from '../../reuseables/TextareaCustom';
+import React, { useState, useEffect } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import CheckboxCustom from "../../reuseables/CheckboxCustom";
+import TextInputCustom from "../../reuseables/TextInputCustom";
+import TextareaCustom from "../../reuseables/TextareaCustom";
 
-import PlineTools, { TypeAlert } from '../../services/PlineTools';
+import PlineTools, { TypeAlert } from "../../services/PlineTools";
 
 const InboundsForm = (props: any) => {
   const [state, setState] = useState({
     id: null,
     name: "",
     description: "",
-    enable: ""
+    enable: true,
   });
-
 
   const saveData = (e: any) => {
     e.preventDefault();
@@ -23,15 +22,16 @@ const InboundsForm = (props: any) => {
       PlineTools.postRequest(url, state)
         .then((result: any) => {
           if (result.data.hasError) {
-            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+            PlineTools.errorDialogMessage(result.data.messages);
           } else {
             props.modal(false);
             props.reload();
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     } else {
       PlineTools.patchRequest(url, state)
@@ -44,12 +44,12 @@ const InboundsForm = (props: any) => {
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
-
-  }
+  };
   const getData = () => {
     const id = props.id;
     if (id != undefined) {
@@ -58,14 +58,15 @@ const InboundsForm = (props: any) => {
           setState(result.data);
         })
         .catch(() => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
   };
   useEffect(() => {
     getData();
     console.log(props.id);
-
   }, []);
   return (
     <Row>
@@ -73,14 +74,6 @@ const InboundsForm = (props: any) => {
         <h5>Iutbound Route</h5>
         <hr />
         <Form onSubmit={saveData}>
-          <Row>
-            <CheckboxCustom
-              name="enable"
-              label="Enable"
-              checked={state.enable}
-              setState={setState}
-            />
-          </Row>
           <Row>
             <TextInputCustom
               name="name"
@@ -115,12 +108,11 @@ const InboundsForm = (props: any) => {
         </Form>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default InboundsForm
-
+export default InboundsForm;
 
 InboundsForm.defaultProps = {
-  id: null
-}
+  id: null,
+};

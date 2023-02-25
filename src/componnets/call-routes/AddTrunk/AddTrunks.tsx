@@ -45,19 +45,24 @@ const AddTrunks = (props: any) => {
     e.preventDefault();
     let url = "/outbound-route-trunks/" + props.id;
     var data: any[] = [state].concat(rowData);
-    PlineTools.postRequest(url, data)
-      .then((result: any) => {
-        if (result.data.hasError) {
-          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-        } else {
-          props.reload();
-          getData()
-        }
-      })
-      .catch((error: any) => {
-        PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+    if (PlineTools.duplicateTrunk(data)) {
+      PlineTools.postRequest(url, data)
+        .then((result: any) => {
+          if (result.data.hasError) {
+            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+          } else {
+            props.reload();
+            getData()
+          }
+        })
+        .catch((error: any) => {
+          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
 
-      });
+        });
+
+    } else {
+      PlineTools.errorDialogMessage("Duplicate Trunk Choose Another one")
+    }
 
   }
   //for Grid Options

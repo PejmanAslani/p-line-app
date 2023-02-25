@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Col, Row } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
-import CheckboxCustom from '../../reuseables/CheckboxCustom';
-import TextInputCustom from '../../reuseables/TextInputCustom';
-import TextareaCustom from '../../reuseables/TextareaCustom';
+import React, { useState, useEffect } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import CheckboxCustom from "../../reuseables/CheckboxCustom";
+import TextInputCustom from "../../reuseables/TextInputCustom";
+import TextareaCustom from "../../reuseables/TextareaCustom";
 
-import PlineTools, { TypeAlert } from '../../services/PlineTools';
+import PlineTools, { TypeAlert } from "../../services/PlineTools";
 
 const SpecificOutboundsForm = (props: any) => {
   const [state, setState] = useState({
     id: null,
-    name: '',
+    name: "",
     sequential: 0,
     privateRoute: true,
-    enable: false,
-    description: ''
+    enable: true,
+    description: "",
   });
-
 
   const saveData = (e: any) => {
     e.preventDefault();
@@ -25,15 +24,16 @@ const SpecificOutboundsForm = (props: any) => {
       PlineTools.postRequest(url, state)
         .then((result: any) => {
           if (result.data.hasError) {
-            PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+            PlineTools.errorDialogMessage(result.data.messages);
           } else {
             props.modal(false);
             props.reload();
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     } else {
       PlineTools.patchRequest(url, state)
@@ -46,27 +46,12 @@ const SpecificOutboundsForm = (props: any) => {
           }
         })
         .catch((error) => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
-
-    // if (state.id == null) {
-    //   PlineTools.postRequest(url, state)
-    //     .then((result: any) => {
-    //       if (result.data.hasError) {
-    //         PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-    //       } else {
-    //         props.modal(false);
-    //         props.reload();
-    //       }
-    //     })
-    //     .catch((error: any) => {
-    //       PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
-    //     });
-    // }
-  }
+  };
   const getData = () => {
     const id = props.id;
     if (id != undefined) {
@@ -75,16 +60,16 @@ const SpecificOutboundsForm = (props: any) => {
           setState(result.data);
         })
         .catch(() => {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
         });
     }
   };
   useEffect(() => {
     getData();
     console.log(props.id);
-
   }, []);
-
 
   return (
     <Row>
@@ -93,14 +78,6 @@ const SpecificOutboundsForm = (props: any) => {
         <hr />
         <Form onSubmit={saveData}>
           <Row>
-            <CheckboxCustom
-              name="enable"
-              label="Enable"
-              checked={state.enable}
-              setState={setState}
-            />
-          </Row>
-          <Row>
             <TextInputCustom
               name="name"
               label="Name"
@@ -108,8 +85,6 @@ const SpecificOutboundsForm = (props: any) => {
               setState={setState}
               require={true}
             />
-
-
 
             <TextareaCustom
               name="description"
@@ -137,12 +112,11 @@ const SpecificOutboundsForm = (props: any) => {
         </Form>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default SpecificOutboundsForm
-
+export default SpecificOutboundsForm;
 
 SpecificOutboundsForm.defaultProps = {
-  id: null
-}
+  id: null,
+};

@@ -75,13 +75,11 @@ const SipTrunkForm = (props: any) => {
                     if (result.data.hasError) {
                         PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                     } else {
-
                         navigate('/sip-trunks/index')
                     }
                 })
                 .catch((error) => {
                     PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
-
                 });
         } else {
             PlineTools.patchRequest(url, state)
@@ -89,7 +87,6 @@ const SipTrunkForm = (props: any) => {
                     if (result.data.hasError) {
                         PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                     } else {
-
                         navigate('/sip-trunks/index')
                     }
                 })
@@ -124,7 +121,6 @@ const SipTrunkForm = (props: any) => {
                     <Row>
                         <CheckboxCustom name="enable" label="Enable" checked={state.enable} setState={setState} />
                     </Row>
-
                     <Row>
                         <TextInputCustom
                             name="name"
@@ -143,15 +139,13 @@ const SipTrunkForm = (props: any) => {
                                     onChange={(e) => {
                                         setState({ ...state, registerMode: e.target.value });
                                         validationSet(e.target.value);
-                                    }}
-                                >
+                                    }}>
                                     <option value={"NoRegister"}>NoRegister</option>
                                     <option value={"Registrable"}>Registrable</option>
                                     <option value={"Register"}>Register</option>
                                 </select>
                             </Form.Group>
                         </Col>
-
                     </Row>
                     <Row>
                         <TextInputCustom
@@ -160,7 +154,6 @@ const SipTrunkForm = (props: any) => {
                             required={isrequire.username}
                             value={state.username}
                             setState={setState}
-
                         />
                         <TextInputCustom
                             name="password"
@@ -233,7 +226,6 @@ const SipTrunkForm = (props: any) => {
                         />
                     </Row>
                     <Row>
-
                         <TextInputCustom
                             md={12}
                             name="proxy"
@@ -259,7 +251,6 @@ const SipTrunkForm = (props: any) => {
                             value={state.acl}
                             setState={setState}
                         />
-
                     </Row>
                     <Button variant="primary" type="submit">
                         Save

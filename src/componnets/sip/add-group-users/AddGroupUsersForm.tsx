@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import {Button, Col, Form, Row} from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import TextInputCustom from '../../reuseables/TextInputCustom'
 import ToolTipCustom from '../../reuseables/tooltip/ToolTipCustom'
-import PlineTools, {TypeAlert} from '../../services/PlineTools'
-import {useNavigate, useParams} from 'react-router'
+import PlineTools, { TypeAlert } from '../../services/PlineTools'
+import { useNavigate, useParams } from 'react-router'
 
 const AddGroupUsersForm = (props: any) => {
     const params = useParams();
+    const [error, setError] = useState('');
     const [state, setState] = useState({
         range: "",
         passwordType: "NoPassword",
@@ -14,7 +15,6 @@ const AddGroupUsersForm = (props: any) => {
         sipProfile: 1,
     });
     const saveData = (e: any) => {
-
         e.preventDefault();
         if (state.sipProfile === 0) {
             PlineTools.showAlert(["SIP Profile not selected."], TypeAlert.Danger);
@@ -24,7 +24,7 @@ const AddGroupUsersForm = (props: any) => {
         PlineTools.postRequest(url, state)
             .then((result) => {
                 if (result.data.hasError) {
-                    PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
+                    setError("Duplicate Range")
                 } else {
                     props.modal(false);
                     props.reload();
@@ -44,7 +44,7 @@ const AddGroupUsersForm = (props: any) => {
     const load = () => {
         PlineTools.getRequest("/sip-users/get-profiles-group")
             .then((result) => {
-                setOptions({...options, sipGroups: result.data.sipGroups, profiles: result.data.profiles});
+                setOptions({ ...options, sipGroups: result.data.sipGroups, profiles: result.data.profiles });
             })
             .catch((error) => {
                 PlineTools.errorDialogMessage("Failed To Get Profiles");
@@ -71,11 +71,13 @@ const AddGroupUsersForm = (props: any) => {
         <>
             <Row>
                 <Form onSubmit={saveData}>
-                    <Col md={{span: 8, offset: 2}}>
+                    <Col md={{ span: 8, offset: 2 }}>
                         <h5>Add Users As Group</h5>
-                        <hr/>
+                        <hr />
                         <Row>
                             <TextInputCustom
+                                required={true}
+                                error={error}
                                 name="range"
                                 label="Range"
                                 value={state.range}
@@ -85,12 +87,12 @@ const AddGroupUsersForm = (props: any) => {
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="registerMode">
                                     <Form.Label>Register Mode</Form.Label>
-                                    <ToolTipCustom/>
+                                    <ToolTipCustom />
                                     <select
 
                                         value={state.passwordType}
                                         onChange={(e) =>
-                                            setState({...state, passwordType: e.target.value})
+                                            setState({ ...state, passwordType: e.target.value })
                                         }
                                         className={"form-select"}>
                                         <option value={"noPassword"}>NoPassword</option>
@@ -104,11 +106,11 @@ const AddGroupUsersForm = (props: any) => {
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="registerMode">
                                     <Form.Label>SipGroup</Form.Label>
-                                    <ToolTipCustom/>
+                                    <ToolTipCustom />
                                     <select
                                         value={state.sipGroup}
                                         onChange={(e) => {
-                                            setState({...state, sipGroup: parseInt(e.target.value)})
+                                            setState({ ...state, sipGroup: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
                                         {options.sipGroups.map((opt: any) => (
@@ -122,11 +124,11 @@ const AddGroupUsersForm = (props: any) => {
                             <Col md={6}>
                                 <Form.Group className="mb-3" controlId="registerMode">
                                     <Form.Label>SipProfiles</Form.Label>
-                                    <ToolTipCustom/>
+                                    <ToolTipCustom />
                                     <select
                                         value={state.sipProfile}
                                         onChange={(e) => {
-                                            setState({...state, sipProfile: parseInt(e.target.value)})
+                                            setState({ ...state, sipProfile: parseInt(e.target.value) })
                                         }}
                                         className={"form-select"}>
                                         {options.profiles.map((opt: any) => (

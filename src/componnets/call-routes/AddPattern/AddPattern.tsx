@@ -14,7 +14,7 @@ function AddPattern(props: any) {
     outboundRoute: {
       id: props.id,
     },
-    dropNumber: null,
+    dropNumber: 0,
     prefixNum: "",
     pattern: "",
     sequential: 0,
@@ -55,6 +55,7 @@ function AddPattern(props: any) {
         );
       });
   };
+  
   //Load Component
   useEffect(() => {
     getData();
@@ -65,21 +66,28 @@ function AddPattern(props: any) {
     setState({ ...state, outboundRoute: { id: RouteID } });
     e.preventDefault();
     let url = "/outbound-route-patterns/" + RouteID;
+    //push data into array
     var data: any[] = [state].concat(rowData);
-    PlineTools.postRequest(url, data)
-      .then((result) => {
-        if (result.data.hasError) {
-          PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
-        } else {
-          props.reload();
-          getData();
-        }
-      })
-      .catch((error) => {
-        PlineTools.errorDialogMessage(
-          "An error occurred while executing your request. Contact the system administrator"
-        );
-      });
+    //check duplication
+    if (PlineTools.duplicatePattern(data)) {
+      PlineTools.postRequest(url, data)
+        .then((result) => {
+          if (result.data.hasError) {
+            PlineTools.errorDialogMessage(result.data.messages);
+          } else {
+            props.reload();
+            getData();
+          }
+        })
+        .catch((error) => {
+          PlineTools.errorDialogMessage(
+            "An error occurred while executing your request. Contact the system administrator"
+          );
+        });
+    } else {
+      PlineTools.errorDialogMessage("Duplicate Pattern")
+    }
+
   };
 
   function CheckBox(params: any) {
@@ -136,7 +144,13 @@ function AddPattern(props: any) {
       width: 100,
       cellRenderer: CheckBox,
     },
-    { field: "delete", headerName: "Delete", cellRenderer: DeleteRow, filter: false, sortable: false },
+    {
+      field: "delete",
+      headerName: "Delete",
+      cellRenderer: DeleteRow,
+      filter: false,
+      sortable: false,
+    },
   ];
   return (
     <div className="container">
@@ -159,6 +173,8 @@ function AddPattern(props: any) {
             value={state.pattern}
           />
           <TextInputCustom
+            type="number"
+            min={0}
             md={3}
             setState={setState}
             label="Drop Number"

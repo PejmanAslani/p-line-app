@@ -56,7 +56,7 @@ const SipProfileDetails = () => {
           let data = state[_type][v[0]];
           try {
             data = JSON.parse(data);
-          } catch { }
+          } catch {}
 
           if (Array.isArray(data)) {
             select = [];
@@ -99,8 +99,9 @@ const SipProfileDetails = () => {
                         } else {
                           tmp[_type][v[0]] = e.value;
                         }
-                        setState(tmp)
-
+                        // setState(tmp)
+                        console.log(tmp[_type][v[0]]);
+                        console.log(state);
                       }}
                     />
                     <Form.Text className="text-muted">{v[4]}</Form.Text>
@@ -184,7 +185,6 @@ const SipProfileDetails = () => {
       return (
         <Container>
           <Row key={i}>
-
             <Col>
               <Row>
                 <Col md={4}>
@@ -213,20 +213,30 @@ const SipProfileDetails = () => {
 
   const submit = (e: any) => {
     e.preventDefault();
-    state.id = profileParam.id;
-    PlineTools.postRequest("/sip-profile-details/save", state)
-      .then((result) => {
-        if (result.status) {
-          PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator", true)
-        } else {
-          PlineTools.successDialogMessage("Information successfully recorded", true)
-          navigate("/sip-profiles/index");
-        }
-      })
-      .catch((error) => {
-        PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator\n" +
-          error, true)
-      });
+    console.log(state);
+    // state.id = profileParam.id;
+    // PlineTools.postRequest("/sip-profile-details/save", state)
+    //   .then((result) => {
+    //     if (result.status) {
+    //       PlineTools.errorDialogMessage(
+    //         "An error occurred while executing your request. Contact the system administrator",
+    //         true
+    //       );
+    //     } else {
+    //       PlineTools.successDialogMessage(
+    //         "Information successfully recorded",
+    //         true
+    //       );
+    //       navigate("/sip-profiles/index");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     PlineTools.errorDialogMessage(
+    //       "An error occurred while executing your request. Contact the system administrator\n" +
+    //         error,
+    //       true
+    //     );
+    //   });
   };
 
   return (
@@ -287,4 +297,3 @@ export default SipProfileDetails;
 function stringToLabel(arg0: any) {
   throw new Error("Function not implemented.");
 }
-

@@ -7,7 +7,8 @@ import PlineTools from "../services/PlineTools";
 
 interface LogoutProps {
   LogoutAction: Function;
-  AlertView: any
+
+  AlertView: any;
 }
 
 const PrivateRoute = (props: LogoutProps) => {
@@ -28,7 +29,7 @@ const PrivateRoute = (props: LogoutProps) => {
   return PlineTools.getCookies("token") != undefined ? (
     <>
       <Header
-         AlertView={props.AlertView}
+        AlertView={props.AlertView}
         fullname={getFullaname()}
         LogoutAction={() => {
           if (window.confirm("Are you sure you want to leave?"))
@@ -37,9 +38,7 @@ const PrivateRoute = (props: LogoutProps) => {
       />
 
       <Row>
-        <Col md={{ span: 10, offset: 1 }}>
-          
-        </Col>
+        <Col md={{ span: 10, offset: 1 }}></Col>
       </Row>
     </>
   ) : (
