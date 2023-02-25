@@ -147,7 +147,7 @@ const GlobalOutbounds = () => {
       </p>
     );
   };
-  
+
   function DeleteRow(e: any) {
     return (
       <p
