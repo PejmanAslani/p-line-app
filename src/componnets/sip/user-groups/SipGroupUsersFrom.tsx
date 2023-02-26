@@ -5,7 +5,7 @@ import TextareaCustom from "../../reuseables/TextareaCustom";
 import TextInputCustom from "../../reuseables/TextInputCustom";
 import PlineTools, { TypeAlert } from "../../services/PlineTools";
 
-const SipUserGroupsForm = (props: any) => {
+const SipGroupUsersFrom = (props: any) => {
   const params = useParams();
   const [state, setState] = useState({
     id: null,
@@ -22,7 +22,8 @@ const SipUserGroupsForm = (props: any) => {
           if (result.data.hasError) {
             PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
           } else {
-            navigate('/sip-group-users/index')
+            props.modal(false);
+            props.reload();
           }
         })
         .catch((error: any) => {
@@ -34,7 +35,8 @@ const SipUserGroupsForm = (props: any) => {
           if (result.data.hasError) {
             PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
           } else {
-            navigate('/sip-group-users/index')
+            props.modal(false);
+            props.reload();
           }
         })
         .catch((error: any) => {
@@ -44,8 +46,7 @@ const SipUserGroupsForm = (props: any) => {
   }
 
   const getData = () => {
-    const id = params.id;
-    console.log(params.id)
+    const id = props.id;
     if (id != undefined) {
       PlineTools.getRequest("/sip-group-users/" + id)
         .then((result) => {
@@ -62,7 +63,7 @@ const SipUserGroupsForm = (props: any) => {
 
   return (
     <Row>
-      <Col md={{ span: 8, offset: 2 }}>
+      <Col md={{ span: 10, offset: 2 }}>
         <h5>SIP User Group</h5>
         <hr />
         <Form onSubmit={saveData}>
@@ -87,11 +88,13 @@ const SipUserGroupsForm = (props: any) => {
             Save
           </Button>{" "}
           <Button
-            onClick={() => {
-              navigate("/sip-group-users/index");
-            }}
+
             variant="danger"
-            type="button">
+            type="button"
+            onClick={() => {
+              props.modal(false)
+            }}
+          >
             Cancel
           </Button>
         </Form>
@@ -102,4 +105,4 @@ const SipUserGroupsForm = (props: any) => {
   );
 };
 
-export default SipUserGroupsForm;
+export default SipGroupUsersFrom;

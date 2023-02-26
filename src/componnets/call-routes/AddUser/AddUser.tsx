@@ -14,15 +14,13 @@ const AddUser = (props: any) => {
         group: true,
         range: false
     })
-    const [rowData, setRowData] = useState<any>([]
-        // outboundRoute: {
-        //     id: 0
-        // },
-        // sipUser: {
-        //     id: 0
-        // },
-        // enable: false
-    );
+    const [rowData, setRowData] = useState<any>({
+        users: [],
+        outboundRoute: {
+            id: 0,
+        },
+        enable: true
+    });
     const [options, setOptions] = useState({
         Groups: [],
     });
@@ -31,7 +29,6 @@ const AddUser = (props: any) => {
         type: "range",
         value: "",
     });
-
     const GetUserGroups = () => {
         PlineTools.getRequest("/sip-group-users").then((result) => {
             if (result.data.hasError) {
@@ -41,31 +38,31 @@ const AddUser = (props: any) => {
             }
         });
     };
-    const AddUser = (e: any) => {
+    //get Users with range or group
+    const GetUsers = (e: any) => {
         e.preventDefault();
-        let url = props.urlUser + props.id;
-        PlineTools.postRequest(url, state)
-            .then((result: any) => {
-                if (result.data) {
-                    setRowData(result.data)
-                } else {
-                    props.reload();
-                    getData();
-                }
-            })
-            .catch((error: any) => {
-                PlineTools.errorDialogMessage(
-                    "An error occurred while executing your request. Contact the system administrator"
-                );
-            });
+        let url = props.urlUser;
+        console.log(state);
+        // PlineTools.postRequest(url, state)
+        //     .then((result: any) => {
+        //         if (result.data) {
+        //             setRowData({...rowData, users: result.data})
+        //         } else {
+        //             props.reload();
+        //             getData();
+        //         }
+        //     })
+        //     .catch((error: any) => {
+        //         PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
+        //     });
     };
     const getData = () => {
         const id = props.id;
         PlineTools.getRequest("/outbound-route-users/" + id)
             .then((result: any) => {
-                const lengh = result.data.length;
-                for (let i = 0; i <= lengh; i++) {
-                    setRowData(result.data);
+                const length = result.data.length;
+                for (let i = 0; i <= length; i++) {
+                    setRowData({...rowData, users: result.data});
                 }
             })
             .catch(() => {
@@ -92,11 +89,10 @@ const AddUser = (props: any) => {
                 );
             });
     };
-
     useEffect(() => {
         getData();
         GetUserGroups();
-        setState({...rowData, outboundRoute: {id: props.id}});
+        setRowData({...rowData, outboundRoute: {id: props.id}});
     }, []);
     const columns = [
         {
@@ -142,7 +138,7 @@ const AddUser = (props: any) => {
                     e.api.forEachNodeAfterFilter((node: any) =>
                         newRowData.push(node.data)
                     );
-                    saveChanges(newRowData);
+                    // saveChanges(newRowData);
                 }}
             >
                 <Trash3Fill color="red"/>
@@ -150,13 +146,7 @@ const AddUser = (props: any) => {
         );
     }
 
-    const dragSort = (params: any) => {
-        let newRowData: any[] = [];
-        params.api.forEachNodeAfterFilterAndSort((node: any) =>
-            newRowData.push(node.data)
-        );
-        saveChanges(newRowData);
-    };
+
     return (
         <div className="container">
             <h3> Add Users</h3>
@@ -216,7 +206,10 @@ const AddUser = (props: any) => {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Button variant="success" type="submit">
+                        <Button variant="success" onClick={(e: any) => {
+                            GetUsers(e)
+                        }
+                        }>
                             Add User
                         </Button>
                         {" "}
@@ -238,9 +231,8 @@ const AddUser = (props: any) => {
             <DataGrid
                 dnd={false}
                 paging={true}
-                dragSort={dragSort}
                 columnDefs={columns}
-                rowData={rowData}
+                rowData={rowData.users}
             />
 
         </div>

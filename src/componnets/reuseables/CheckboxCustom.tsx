@@ -6,7 +6,7 @@ const CheckboxCustom = (props: any) => {
   const handleChecked = (e: any) => {
     const value = e.target.checked;
     const name = e.target.name;
-    console.log(name);
+  
     props.setState((state: any) => ({
       ...state,
       [name]: value,

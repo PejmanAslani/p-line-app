@@ -64,7 +64,6 @@ const DataGrid = (props: any) => {
                     ref={gridRef}
                     icons={icons}
                     gridOptions={gridOptions}
-                    onGridReady={hideLoading}
                     onRowDragEnd={props.dragSort}
                     rowData={props.rowData}
                     defaultColDef={defaultColDef}

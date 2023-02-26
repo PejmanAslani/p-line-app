@@ -66,7 +66,7 @@ const InboundsForm = (props: any) => {
   };
   useEffect(() => {
     getData();
-    console.log(props.id);
+   
   }, []);
   return (
     <Row>

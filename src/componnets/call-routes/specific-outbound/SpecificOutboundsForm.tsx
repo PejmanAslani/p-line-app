@@ -68,7 +68,7 @@ const SpecificOutboundsForm = (props: any) => {
   };
   useEffect(() => {
     getData();
-    console.log(props.id);
+
   }, []);
 
   return (

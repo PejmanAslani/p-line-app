@@ -20,7 +20,12 @@ function AddPattern(props: any) {
     sequential: 0,
     enable: true,
   });
-
+    const [data, setData]=useState({
+        id:"",
+        name:"",
+        value:"",
+        type:""
+    })
   //get Data For View
   const getData = () => {
     const id = props.id;
@@ -55,7 +60,6 @@ function AddPattern(props: any) {
         );
       });
   };
-  
   //Load Component
   useEffect(() => {
     getData();

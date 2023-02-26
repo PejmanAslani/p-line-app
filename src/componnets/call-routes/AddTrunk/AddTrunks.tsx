@@ -26,7 +26,7 @@ const AddTrunks = (props: any) => {
   const getTrunks = () => {
     PlineTools.getRequest("/sip-trunks").then((result) => {
       setOptions(result.data.content)
-      console.log(options)
+     
     })
   }
   const getData = () => {
@@ -41,6 +41,7 @@ const AddTrunks = (props: any) => {
         PlineTools.errorDialogMessage("An error occurred while executing your request. Contact the system administrator");
       });
   }
+  
   const Addtrunk = (e: any) => {
     e.preventDefault();
     let url = "/outbound-route-trunks/" + props.id;

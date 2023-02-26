@@ -56,7 +56,7 @@ const SipProfileDetails = () => {
           let data = state[_type][v[0]];
           try {
             data = JSON.parse(data);
-          } catch {}
+          } catch { }
 
           if (Array.isArray(data)) {
             select = [];
@@ -81,7 +81,7 @@ const SipProfileDetails = () => {
           <Row key={i}>
             <Col>
               <Row>
-                <Col md={4}>
+                <Col md={5}>
                   <Form.Group className="mb-3" controlId={v[0]}>
                     <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
                     <Select
@@ -100,8 +100,7 @@ const SipProfileDetails = () => {
                           tmp[_type][v[0]] = e.value;
                         }
                         // setState(tmp)
-                        console.log(tmp[_type][v[0]]);
-                        console.log(state);
+
                       }}
                     />
                     <Form.Text className="text-muted">{v[4]}</Form.Text>
@@ -123,7 +122,7 @@ const SipProfileDetails = () => {
           <Row key={i}>
             <Col>
               <Row>
-                <Col md={4}>
+                <Col md={5}>
                   <Form.Group className="mb-3" controlId={v[0]}>
                     <Form.Check
                       type="checkbox"
@@ -154,7 +153,7 @@ const SipProfileDetails = () => {
           <Row key={i}>
             <Col>
               <Row>
-                <Col md={4}>
+                <Col md={5}>
                   <Form.Group className="mb-3" controlId={v[0]}>
                     <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
                     <Form.Control
@@ -187,7 +186,7 @@ const SipProfileDetails = () => {
           <Row key={i}>
             <Col>
               <Row>
-                <Col md={4}>
+                <Col md={5}>
                   <Form.Group className="mb-3" controlId={v[0]}>
                     <Form.Label>{PlineTools.stringToLabel(v[0])}</Form.Label>
                     <Form.Control

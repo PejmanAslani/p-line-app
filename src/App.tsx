@@ -114,7 +114,7 @@ const App = () => {
       window.scrollTo(0, 0);
     };
   }, []);
-
+  
   const login = (result: ILoginObject) => {
     PlineTools.setCookies("username", result.username);
     PlineTools.setCookies("token", result.token);
@@ -123,7 +123,6 @@ const App = () => {
     setState(false);
     navigate("/");
   };
-
   const logout = () => {
     PlineTools.setCookies("username", "");
     PlineTools.setCookies("token", "");
@@ -132,7 +131,7 @@ const App = () => {
     setState(false);
     navigate("/login");
   };
-
+  
   const mainAlert = () => {
     return (
       <Container>

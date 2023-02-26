@@ -29,7 +29,7 @@ const GlobalOutbounds = () => {
     let url = "/outbound-routes";
     data.forEach((v: any, i: number) => {
       v.sequential = i;
-      console.log(v,i)
+      
     });
     // PlineTools.patchRequest(url, data)
     //   .then((result) => {

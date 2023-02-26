@@ -31,7 +31,7 @@ const SipTrunks = () => {
   const getData = (page = 0, size = 99999) => {
     PlineTools.getRequest(`/sip-trunks/?page=${page}&size=${size}`)
       .then((data) => {
-        console.log(data.data.content);
+        
         setRowData(data.data.content);
       })
       .catch((error) => {

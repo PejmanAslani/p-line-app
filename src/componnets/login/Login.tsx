@@ -16,7 +16,6 @@ interface LoginProps {
 
 function Login(props: LoginProps) {
 
-
     const captchaRef = useRef<any>();
 
     const handleClick = () => {

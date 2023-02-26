@@ -10,7 +10,9 @@ import {
 import PlineTools, { TypeAlert } from '../../services/PlineTools';
 import ModalCustom from '../../reuseables/modal/ModalCustom';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import SipUserGroupsForm from './SipGroupUsersFrom';
+import SipGroupUsersFrom from './SipGroupUsersFrom';
 
 
 const SipGroupUsers = () => {
@@ -23,13 +25,13 @@ const SipGroupUsers = () => {
     const [sizeModal, setSizeModal] = useState("")
     const saveChanges = (data: any) => {
         let url = "/sip-group-users";
-        console.log(data);
         PlineTools.patchRequest(url, data)
             .then((result) => {
                 if (result.data.hasError) {
                     PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                 } else {
                     reload();
+
                 }
             })
             .catch((error) => {
@@ -41,7 +43,6 @@ const SipGroupUsers = () => {
         PlineTools.getRequest(
             `/sip-group-users/?page=${page}&size=${size}`)
             .then((data) => {
-                console.log(data.data.content);
                 setRowData(data.data.content);
             })
             .catch((error) => {
@@ -64,8 +65,12 @@ const SipGroupUsers = () => {
     const actions = (params: any) => {
         let id = params.node.data.id;
         return (<>
-            <PencilSquare style={{cursor:"pointer"}} color="green" size={17} onClick={() => { navigate("/sip-group-users/edit/" + id) }} />
-            <Trash3Fill style={{ paddingLeft: "8px",cursor:"pointer" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
+            <PencilSquare style={{ cursor: "pointer" }} color="green" size={17} onClick={() => {
+                setSizeModal("lg");
+                setModalIsOpen(true);
+                setmodalType(<SipGroupUsersFrom id={id} modal={setModalIsOpen} reload={reload} />)
+            }} />
+            <Trash3Fill style={{ paddingLeft: "8px", cursor: "pointer" }} color="red" size={25} onClick={() => { DeleteRow(params) }} />
         </>
         );
     }
@@ -78,7 +83,6 @@ const SipGroupUsers = () => {
                 if (result.data.hasError) {
                     PlineTools.showAlert(result.data.messages, TypeAlert.Danger);
                 } else {
-
                     getData();
                 }
             });
@@ -104,7 +108,12 @@ const SipGroupUsers = () => {
                     </ModalCustom>
                     <Col>
                         <Button style={{ background: "#1B9CFC", border: "none" }} className='btn-grid' onClick={() => {
-                            navigate("/sip-group-users/create");
+                            setSizeModal("lg");
+                            setModalIsOpen(true);
+                            setmodalType(<SipUserGroupsForm
+                                modal={setModalIsOpen}
+                                reload={() => reload()}
+                            />);
                         }}>Add Sip Group <PlusLg size={18} /></Button>
                     </Col>
                 </Row>

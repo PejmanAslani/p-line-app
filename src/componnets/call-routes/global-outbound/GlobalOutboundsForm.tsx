@@ -70,7 +70,7 @@ const GlobalOutboundsForm = (props: any) => {
   };
   useEffect(() => {
     getData();
-    console.log(props.id);
+    
   }, []);
 
   return (

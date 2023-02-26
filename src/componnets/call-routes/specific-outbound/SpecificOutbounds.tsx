@@ -79,7 +79,6 @@ const SpecificOutbounds = () => {
 
     const Edit = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< GlobalOutboundsForm id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -87,7 +86,7 @@ const SpecificOutbounds = () => {
     }
     const User = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+            
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddUser urlUser="/outbound-route-users/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -95,7 +94,7 @@ const SpecificOutbounds = () => {
     }
     const Pattern = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+           
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddPattern urlPattern="/outbound-route-patterns/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);
@@ -103,7 +102,7 @@ const SpecificOutbounds = () => {
     }
     const Trunk = (params: any) => {
         return <p style={{ cursor: "pointer" }} onClick={() => {
-            console.log(params);
+           
             setSizeModal("lg");
             setModalIsOpen(true);
             setmodalType(< AddTrunks urlTrunk="/outbound-route-trunks/" id={params.node.data.id} modal={setModalIsOpen} reload={reload} />);

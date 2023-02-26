@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DataGrid from "../../grid-view/DataGrid/DataGrid";
 import {
-  CheckLg,
+  CheckLg, Lightbulb, LightbulbFill,
   PencilSquare,
   PlusLg,
   Trash,
@@ -24,6 +24,7 @@ const SipUsers = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modaltype, setmodalType] = useState({});
   const [sizeModal, setSizeModal] = useState("");
+  
   const saveChanges = (data: any) => {
     let url = "/sip-users";
     PlineTools.patchRequest(url, data)
@@ -44,7 +45,6 @@ const SipUsers = () => {
     setOverlay(true);
     PlineTools.getRequest(`/sip-users/?page=${page}&size=${size}`)
       .then((data) => {
-        console.log(data.data);
         setRowData(data.data.content);
       })
       .catch((error) => {
@@ -107,28 +107,41 @@ const SipUsers = () => {
   }
 
   const columns = [
-    {
-      field: "row",
-      valueGetter: "node.rowIndex + 1",
-      headerName: "Row",
-      width: "150",
-    },
-    { field: "uid", headerName: "User" },
+    // {
+    //   field: "row",
+    //   valueGetter: "node.rowIndex + 1",
+    //   headerName: "Row",
+    //   width: "150",
+    // },
+    {field: "port" ,headerName: "", filter: false,sortable : false ,width: "60",cellRenderer:(params:any)=>{
+
+          return params.node.data.port ===0 ? (
+              <LightbulbFill color="#4b4b4b" size={19} />
+          ) : (
+              <LightbulbFill color="#3ae374" size={19} />
+          );
+      }},
+    {field: "ipAddress" ,headerName: "User Agent Address", width: "auto",cellRenderer:(params:any)=>{
+      if(params.node.data.port===0)
+        return   params.node.data.ipAddress ;
+      return   params.node.data.ipAddress + ':' +params.node.data.port;
+      }},
+    { field: "uid", headerName: "User" ,width: "250"},
     { field: "sipProfile.name", headerName: "Sip Profile", width: "250" },
-    { field: "sipUserGroup.name", headerName: "Sip Group", width: "300" },
+    { field: "sipUserGroup.name", headerName: "Sip Group", width: "auto" },
     {
       field: "enable",
       headerName: "Status",
       cellRenderer: CheckBox,
-      width: "280",
+      width: "150",
     },
     {
       field: "delete",
-      headerName: "Options",
+      headerName: "Action",
       cellRenderer: actions,
       filter: false,
       sortable: false,
-      width: "250",
+      width: "auto",
     },
   ];
   return (
